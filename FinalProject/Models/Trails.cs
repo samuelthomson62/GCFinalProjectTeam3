@@ -35,7 +35,7 @@ namespace FinalProject.Models
         public Trails(JToken t)
         {
             //this.Id = t["id"];
-            this.Name = t["trails"][0]["name"].ToString();
+            this.Name = t["name"].ToString();
             //this.Summary = t["summary"].ToString();
             //this.Difficulty = t["difficulty"].ToString();
             //this.Stars = double.Parse(t["stars"].ToString());

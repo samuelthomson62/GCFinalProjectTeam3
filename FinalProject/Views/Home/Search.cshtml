@@ -1,4 +1,10 @@
-﻿@model FinalProject.Models.Trails
+﻿@model IEnumerable<FinalProject.Models.Trails>
 
-<p>@Model.Name</p>
+<p>
+    @foreach (var item in Model)
+    {
+    <p>@item.Name</p>
 
+
+
+}</p>
