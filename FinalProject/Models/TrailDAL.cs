@@ -36,7 +36,7 @@ namespace FinalProject.Models
             JToken t = JToken.Parse(APItext);
 
             List<Trails> Result = new List<Trails>();
-            List<JToken> x = t["trails"][0].ToList();
+            List<JToken> x = t["trails"].ToList();
             foreach (JToken y in x)
             {
                 Trails z = new Trails(y);
