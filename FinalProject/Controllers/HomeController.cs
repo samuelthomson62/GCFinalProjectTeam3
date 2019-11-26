@@ -20,27 +20,21 @@ namespace FinalProject.Controllers
             return View();
         }
 
-        public IActionResult Search(string Id)
+        //public IActionResult Search(string Id)
+        //{
+        //    List<Trails> trail = TrailDAL.GetResults(Id);
+        //    return View(trail);
+        //}
+        public IActionResult Search(string Id, string Difficulty)
         {
-
-            List<Trails> trail = TrailDAL.GetResults(Id);
+            List<Trails> trail = TrailDAL.GetResults(Id, Difficulty);
             return View(trail);
-
-            //string key = "200641663-d6ba0e012de562cebaf18e1d1874a93f";
-            //HttpWebRequest request = WebRequest.CreateHttp($"https://www.hikingproject.com/data/get-trails-by-id?ids={Id}&key=200641663-d6ba0e012de562cebaf18e1d1874a93f");
-            //HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            //StreamReader rd = new StreamReader(response.GetResponseStream());
-            //string APItext = rd.ReadToEnd();
-            //JToken t = JToken.Parse(APItext);
-            //Trails d = new Trails(t);
-            //return View(d);
         }
 
         public IActionResult Privacy()
         {
             return View();
         }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
