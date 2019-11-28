@@ -8,6 +8,11 @@ namespace FinalProject.Controllers
 {
     public class HomeController : Controller
     {
+
+        ApplicationUser db = new ApplicationUser();
+        string uLevel = "";
+
+
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
@@ -25,9 +30,12 @@ namespace FinalProject.Controllers
         //    List<Trails> trail = TrailDAL.GetResults(Id);
         //    return View(trail);
         //}
-        public IActionResult Search(string Id, string Difficulty)
+        public IActionResult Search(string Id)
         {
-            List<Trails> trail = TrailDAL.GetResults(Id, Difficulty);
+            //ApplicationUser me = new ApplicationUser(User);
+            //List<Trails> trail = TrailDAL.GetResults(me.City, me.Difficulty);
+            //return View(trail);
+            List<Trails> trail = TrailDAL.GetResults(Id, uLevel);
             return View(trail);
         }
 
@@ -36,70 +44,71 @@ namespace FinalProject.Controllers
             return View();
         }
 
-        //public string UserLevel(int times, string build, string preExisting)
-        //{
-        //    string uLevel = "";
-        //    if (build == "overweight" || build == "average")
-        //    {
-        //        if (times <= 3)
-        //        {
+        public string UserLevel(int TimesDoneBefore, string BodyBuild, string PreExistingCondition)
+        {
+            
+            if (BodyBuild == "overweight" || BodyBuild == "average")
+            {
+                if (TimesDoneBefore <= 3)
+                {
 
-        //            uLevel = "green";
+                    uLevel = "green";
 
-        //        }
-        //        if (times >= 5 && times >= 3)
-        //        {
-        //            if (preExisting == "y")
+                }
+                if (TimesDoneBefore >= 5 && TimesDoneBefore >= 3)
+                {
+                    if (PreExistingCondition == "y")
 
-        //            {
-        //                uLevel = "green";
-        //            }
+                    {
+                        uLevel = "green";
+                    }
 
-        //            else
-        //            {
-        //                uLevel = "greenBlue";
-        //            }
+                    else
+                    {
+                        uLevel = "greenBlue";
+                    }
 
-        //        }
-        //    }
-        //    if (build == "average" || build == "athletic")
-        //    {
-        //        if (times >= 8)
-        //        {
-        //            if (preExisting == "Y" && build == "average")
-        //            {
-        //                uLevel = "greenBlue";
-        //            }
-        //            else
-        //            {
-        //                uLevel = "blue";
-        //            }
-        //        }
+                }
+            }
+            if (BodyBuild == "average" || BodyBuild == "athletic")
+            {
+                if (TimesDoneBefore >= 8)
+                {
+                    if (PreExistingCondition == "Y" && BodyBuild == "average")
+                    {
+                        uLevel = "greenBlue";
+                    }
+                    else
+                    {
+                        uLevel = "blue";
+                    }
+                }
 
-        //        if (times >= 10)
-        //        {
-        //            if (preExisting == "y" && build == "average")
-        //            {
-        //                uLevel = "blue";
-        //            }
-        //            else
-        //            {
-        //                uLevel = "blueBlack";
-        //            }
-        //        }
-        //        if (times >= 15)
-        //        {
-        //            if (preExisting == "y" && build == "average")
-        //            {
-        //                uLevel = "blueBlack";
-        //            }
-        //            else
-        //            {
-        //                uLevel = "Black";
-        //            }
-        //        }
-        //    }
-        //    return uLevel;
+                if (TimesDoneBefore >= 10)
+                {
+                    if (PreExistingCondition == "y" && BodyBuild == "average")
+                    {
+                        uLevel = "blue";
+                    }
+                    else
+                    {
+                        uLevel = "blueBlack";
+                    }
+                }
+                if (TimesDoneBefore >= 15)
+                {
+                    if (PreExistingCondition == "y" && BodyBuild == "average")
+                    {
+                        uLevel = "blueBlack";
+                    }
+                    else
+                    {
+                        uLevel = "Black";
+                    }
+                }
+            }
+            return uLevel;
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

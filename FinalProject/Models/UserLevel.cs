@@ -8,9 +8,7 @@ namespace FinalProject.Models
     public class UserLevel
     {
 
-
-
-        }
-
+       
     }
+}
 
