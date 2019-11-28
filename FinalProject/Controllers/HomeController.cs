@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Diagnostics;
 
+
 namespace FinalProject.Controllers
 {
     public class HomeController : Controller
@@ -17,6 +18,7 @@ namespace FinalProject.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.Email = User.Identity.Name;
             return View();
         }
 
@@ -28,6 +30,7 @@ namespace FinalProject.Controllers
         public IActionResult Search(string Id, string Difficulty)
         {
             List<Trails> trail = TrailDAL.GetResults(Id, Difficulty);
+
             return View(trail);
         }
 
