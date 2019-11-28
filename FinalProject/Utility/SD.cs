@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FinalProject.Models
+namespace FinalProject.Utility
 {
-    public class UserLevel
+    public static class SD
     {
 
 
-
-        }
-
     }
-
+}
