@@ -50,16 +50,16 @@ namespace FinalProject.Controllers
 
             return bodybuild.ToString();
         }
-        public int GetTimes()
+        public string GetTimes()
         {
             List<ApplicationUser> users = new List<ApplicationUser>();
 
             var U = User.Identity.Name;
-            int Times = Convert.ToInt16(from n in users
+            var T = from n in users
                                            where n.UserName == U
-                                           select n.TimesDoneBefore);
+                                           select n.TimesDoneBefore;
 
-            
+            int Times = T;
 
             return Times;
         }
@@ -80,8 +80,8 @@ namespace FinalProject.Controllers
         public string UserLevel()
         {
             string PreExistingCondition = GetPreExisitingCondition();
-            var BodyBuild = GetBuild();
-            int TimesDoneBefore = GetTimes();
+            int BodyBuild = GetBuild();
+            string TimesDoneBefore = GetTimes();
             string difficulty = "";
             //-----------------------------------No preexisting Condition--------------------------------------------
             if (PreExistingCondition == "n")
