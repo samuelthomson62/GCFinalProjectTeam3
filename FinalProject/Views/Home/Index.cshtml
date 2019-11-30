@@ -1,12 +1,20 @@
-﻿<h2>Search Trails by Name</h2>
+@model IEnumerable<FinalProject.Models.ApplicationUser>
+<h2>Search Trails by Name</h2>
 
 <form asp-action="Search">
     <p>Location:</p>
     <input name="Id" type="text" />
 
     @*<p>Difficulty:</p>
-    <input name="Difficulty" type="text"/>*@
-   
+        <input name="Difficulty" type="text"/>*@
     <input type="submit" />
+
+    <p>@ViewBag.difficulty</p>
+    <p>@ViewBag.times</p>
+
+    <p>@ViewBag.Name</p>
 </form>
-<p>@ViewBag.Email</p>
+<p>
+    <a asp-action="listo">Listo</a>
+</p>
+
