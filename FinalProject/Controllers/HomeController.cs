@@ -1,4 +1,4 @@
-﻿using FinalProject.Data;
+using FinalProject.Data;
 using FinalProject.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -49,37 +49,37 @@ namespace FinalProject.Controllers
         public string GetBuild()
         {
 
-                   var bodybuild = from n in _db.UserLevel
-                                    where n.UserName == User.Identity.Name
-                                      select  n.BodyBuild;
+            var bodybuild = from n in _db.UserLevel
+                            where n.UserName == User.Identity.Name
+                            select n.BodyBuild;
 
-             return bodybuild.Single();
+            return bodybuild.Single();
         }
         public int GetTimes()
         {
             var Times = from n in _db.UserLevel
-                    where n.UserName == User.Identity.Name
+                        where n.UserName == User.Identity.Name
                         select n.TimesDoneBefore;
-           
-       
+
+
             return Times.Single();
         }
         public string GetPreExisitingCondition()
         {
- 
+
             var condition = from n in _db.UserLevel
                             where n.UserName == User.Identity.Name
-                                    select n.PreExistingCondition;
+                            select n.PreExistingCondition;
 
-           
+
             return condition.Single();
         }
         public string GetState()
         {
 
             var state = from n in _db.UserLevel
-                            where n.UserName == User.Identity.Name
-                            select n.State;
+                        where n.UserName == User.Identity.Name
+                        select n.City;
 
 
             return state.Single();
@@ -283,12 +283,12 @@ namespace FinalProject.Controllers
             }
             return difficulty;
         }
-    
 
 
 
 
-    public IActionResult Search()
+
+        public IActionResult Search()
         {
             string Difficulty = UserLevel();
             string state = GetState();
@@ -302,8 +302,8 @@ namespace FinalProject.Controllers
             return View();
         }
 
-       
-        
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
