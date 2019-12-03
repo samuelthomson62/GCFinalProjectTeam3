@@ -18,15 +18,8 @@ namespace FinalProject.Data
             : base(options)
         {
         }
-
-        public DbSet<IdentityUser> TimesDoneBefore { get; set; }
-        public DbSet<IdentityUser> BodyBuild { get; set; }
-        public DbSet<IdentityUser> PreExistingCondition { get; set; }
-        public DbSet<IdentityUser> City { get; set; }
-        public DbSet<IdentityUser> State { get; set; }
-        public DbSet<IdentityUser> ZipCode { get; set; }
-        public DbSet<IdentityUser> difficulty { get; set; }
-
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
+        public DbSet<ApplicationUser> UserLevel { get; set; }
 
     }
 }
