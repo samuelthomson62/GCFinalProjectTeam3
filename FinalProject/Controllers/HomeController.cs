@@ -1,44 +1,299 @@
-﻿using FinalProject.Models;
+using FinalProject.Data;
+using FinalProject.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Diagnostics;
-
+using System.Threading.Tasks;
+using System.Linq;
+using System;
 
 namespace FinalProject.Controllers
 {
     public class HomeController : Controller
     {
 
-        ApplicationUser db = new ApplicationUser();
-        string uLevel = "";
-
-
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ApplicationDbContext _db;
+        public HomeController(ApplicationDbContext db)
         {
-            _logger = logger;
+            _db = db;
         }
+
+
+
+        //private readonly ILogger<HomeController> _logger;
+
+        //public HomeController(ILogger<HomeController> logger)
+        //{
+        //    _logger = logger;
+        //}
 
         public IActionResult Index()
         {
-            ViewBag.Email = User.Identity.Name;
+
+            //var build = GetBuild() ;
+            //var times = GetTimes();
+            //string Condition =GetPreExisitingCondition();
+            //ViewBag.Name = "Use is: " + User.Identity.Name;
+            //ViewBag.difficulty = "Condition is:" + Condition;
+            //ViewBag.Build = "build is: " + build;
+            //ViewBag.Build = "times is: " + times;
+
+            //var level = UserLevel();
+            //ViewBag.UserLevel = "LEvel is:" + level;
             return View();
         }
 
-        //public IActionResult Search(string Id)
-        //{
-        //    List<Trails> trail = TrailDAL.GetResults(Id);
-        //    return View(trail);
-        //}
-        public IActionResult Search(string Id)
+        public string GetBuild()
         {
-            //ApplicationUser me = new ApplicationUser(User);
-            //List<Trails> trail = TrailDAL.GetResults(me.City, me.Difficulty);
-            //return View(trail);
-            List<Trails> trail = TrailDAL.GetResults(Id, uLevel);
 
+            var bodybuild = from n in _db.UserLevel
+                            where n.UserName == User.Identity.Name
+                            select n.BodyBuild;
+
+            return bodybuild.Single();
+        }
+        public int GetTimes()
+        {
+            var Times = from n in _db.UserLevel
+                        where n.UserName == User.Identity.Name
+                        select n.TimesDoneBefore;
+
+
+            return Times.Single();
+        }
+        public string GetPreExisitingCondition()
+        {
+
+            var condition = from n in _db.UserLevel
+                            where n.UserName == User.Identity.Name
+                            select n.PreExistingCondition;
+
+
+            return condition.Single();
+        }
+        public string GetState()
+        {
+
+            var state = from n in _db.UserLevel
+                        where n.UserName == User.Identity.Name
+                        select n.City;
+
+
+            return state.Single();
+        }
+
+
+        public string UserLevel()
+        {
+            var PreExistingCondition = GetPreExisitingCondition();
+            var BodyBuild = GetBuild();
+            var TimesDoneBefore = 5;
+            string difficulty = "";
+            //-----------------------------------No preexisting Condition--------------------------------------------
+            if (PreExistingCondition == "n")
+            {
+
+                // Plump____________________________________________________
+                if (BodyBuild == "plump")
+                {
+                    if (TimesDoneBefore <= 3)
+                    {
+                        difficulty = "green";
+                        return difficulty;
+                    }
+                    if (TimesDoneBefore >= 4 && TimesDoneBefore <= 6)
+                    {
+                        difficulty = "greenBlue";
+                        return difficulty;
+                    }
+                    if (TimesDoneBefore >= 7 && TimesDoneBefore <= 8)
+                    {
+                        difficulty = "greenBlue";
+                        return difficulty;
+                    }
+                    if (TimesDoneBefore >= 9 && TimesDoneBefore <= 10)
+                    {
+                        difficulty = "greenBlue";
+                        return difficulty;
+                    }
+                    if (TimesDoneBefore >= 11 && TimesDoneBefore <= 15)
+                    {
+                        difficulty = "blue";
+                        return difficulty;
+                    }
+                    if (TimesDoneBefore >= 15)
+                    {
+                        difficulty = "blueBlack";
+                        return difficulty;
+                    }
+
+                }
+                // Average____________________________________________________
+                if (BodyBuild == "average")
+                {
+                    if (TimesDoneBefore <= 3)
+                    {
+                        difficulty = "green";
+                        return difficulty;
+                    }
+                    if (TimesDoneBefore >= 4 && TimesDoneBefore <= 6)
+                    {
+                        difficulty = "greenBlue";
+                        return difficulty;
+                    }
+                    if (TimesDoneBefore >= 7 && TimesDoneBefore <= 8)
+                    {
+                        difficulty = "greenBlue";
+                        return difficulty;
+                    }
+                    if (TimesDoneBefore >= 9 && TimesDoneBefore <= 10)
+                    {
+                        difficulty = "blue";
+                        return difficulty;
+                    }
+                    if (TimesDoneBefore >= 11)
+                    {
+                        difficulty = "black";
+                        return difficulty;
+                    }
+
+                }
+                // Athletic____________________________________________________
+
+                if (BodyBuild == "athletic")
+                {
+                    if (TimesDoneBefore == 0)
+                    {
+                        difficulty = "green";
+                        return difficulty;
+                    }
+                    if (TimesDoneBefore >= 1 && TimesDoneBefore <= 3)
+                    {
+                        difficulty = "greenBlue";
+                        return difficulty;
+                    }
+                    if (TimesDoneBefore >= 4 && TimesDoneBefore <= 6)
+                    {
+                        difficulty = "blue";
+                        return difficulty;
+                    }
+                    if (TimesDoneBefore >= 7 && TimesDoneBefore <= 10)
+                    {
+                        difficulty = "blueBlack";
+                        return difficulty;
+                    }
+                    if (TimesDoneBefore >= 11 && TimesDoneBefore <= 15)
+                    {
+                        difficulty = "black";
+                        return difficulty;
+                    }
+                    if (TimesDoneBefore >= 15)
+                    {
+                        difficulty = "dBlack";
+                        return difficulty;
+                    }
+
+                }
+            }
+            //-----------------------------------with preexisting Condition--------------------------------------------
+            if (PreExistingCondition == "y")
+            {
+                // Plump____________________________________________________
+                if (BodyBuild == "plump")
+                {
+                    if (TimesDoneBefore <= 6)
+                    {
+                        difficulty = "green";
+                        return difficulty;
+                    }
+                    if (TimesDoneBefore >= 7 && TimesDoneBefore <= 10)
+                    {
+                        difficulty = "greenBlue";
+                        return difficulty;
+                    }
+
+                    if (TimesDoneBefore >= 11)
+                    {
+                        difficulty = "blue";
+                        return difficulty;
+                    }
+                }
+                // Average____________________________________________________
+                if (BodyBuild == "average")
+                {
+                    if (TimesDoneBefore <= 3)
+                    {
+                        difficulty = "green";
+                        return difficulty;
+                    }
+                    if (TimesDoneBefore >= 4 && TimesDoneBefore <= 6)
+                    {
+                        difficulty = "greenBlue";
+                        return difficulty;
+                    }
+                    if (TimesDoneBefore >= 7 && TimesDoneBefore <= 8)
+                    {
+                        difficulty = "blue";
+                        return difficulty;
+                    }
+                    if (TimesDoneBefore >= 9 && TimesDoneBefore <= 10)
+                    {
+                        difficulty = "blue";
+                        return difficulty;
+                    }
+                    if (TimesDoneBefore >= 11)
+                    {
+                        difficulty = "blueBlack";
+                        return difficulty;
+                    }
+                }
+                // Athletic____________________________________________________
+                if (BodyBuild == "athletic")
+                {
+                    if (TimesDoneBefore == 0)
+                    {
+                        difficulty = "green";
+                        return difficulty;
+                    }
+                    if (TimesDoneBefore >= 1 && TimesDoneBefore <= 3)
+                    {
+                        difficulty = "greenBlue";
+                        return difficulty;
+                    }
+                    if (TimesDoneBefore >= 4 && TimesDoneBefore <= 10)
+                    {
+                        difficulty = "blue";
+                        return difficulty;
+                    }
+
+                    if (TimesDoneBefore >= 11 && TimesDoneBefore <= 15)
+                    {
+                        difficulty = "blueBlack";
+                        return difficulty;
+                    }
+                    if (TimesDoneBefore >= 15)
+                    {
+                        difficulty = "dBlack";
+                        return difficulty;
+                    }
+                }
+            }
+            return difficulty;
+        }
+
+
+
+
+
+        public IActionResult Search()
+        {
+            string Difficulty = UserLevel();
+            string state = GetState();
+
+            List<Trails> trail = TrailDAL.GetResults(state, Difficulty);
             return View(trail);
         }
 
@@ -47,71 +302,8 @@ namespace FinalProject.Controllers
             return View();
         }
 
-        public string UserLevel(int TimesDoneBefore, string BodyBuild, string PreExistingCondition)
-        {
-            
-            if (BodyBuild == "overweight" || BodyBuild == "average")
-            {
-                if (TimesDoneBefore <= 3)
-                {
 
-                    uLevel = "green";
 
-                }
-                if (TimesDoneBefore >= 5 && TimesDoneBefore >= 3)
-                {
-                    if (PreExistingCondition == "y")
-
-                    {
-                        uLevel = "green";
-                    }
-
-                    else
-                    {
-                        uLevel = "greenBlue";
-                    }
-
-                }
-            }
-            if (BodyBuild == "average" || BodyBuild == "athletic")
-            {
-                if (TimesDoneBefore >= 8)
-                {
-                    if (PreExistingCondition == "Y" && BodyBuild == "average")
-                    {
-                        uLevel = "greenBlue";
-                    }
-                    else
-                    {
-                        uLevel = "blue";
-                    }
-                }
-
-                if (TimesDoneBefore >= 10)
-                {
-                    if (PreExistingCondition == "y" && BodyBuild == "average")
-                    {
-                        uLevel = "blue";
-                    }
-                    else
-                    {
-                        uLevel = "blueBlack";
-                    }
-                }
-                if (TimesDoneBefore >= 15)
-                {
-                    if (PreExistingCondition == "y" && BodyBuild == "average")
-                    {
-                        uLevel = "blueBlack";
-                    }
-                    else
-                    {
-                        uLevel = "Black";
-                    }
-                }
-            }
-            return uLevel;
-        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
