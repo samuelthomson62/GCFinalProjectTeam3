@@ -1,7 +1,28 @@
-﻿<h2>Search Trails by Name</h2>
+
+
+<h2>Search Trails by Name</h2>
 
 <form asp-action="Search">
-    <p>Name:</p><input name="Id" type="text" />
+    <p>Search for Recomendations:</p>
+    @*<input name="Id" type="text" />*@
+
+    @*<p>Difficulty:</p>
+        <input name="Difficulty" type="text"/>*@
     <input type="submit" />
 
+    @*<p>@ViewBag.UserLevel</p>
+    <p>@ViewBag.times</p>
+    <p>@ViewBag.Build</p>
+
+    <p>@ViewBag.Name</p>
+    <p>@ViewBag.difficulty</p>
+
+    
+    <p>@ViewBag.Build</p>*@
+
+
 </form>
+<p>
+    <a asp-action="listo">Listo</a>
+</p>
+
