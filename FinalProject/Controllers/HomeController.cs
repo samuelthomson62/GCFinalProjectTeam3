@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Linq;
 using System;
+using System.Security.Claims;
 
 namespace FinalProject.Controllers
 {
@@ -286,7 +287,21 @@ namespace FinalProject.Controllers
 
 
 
+        public IActionResult AddToBucketList(int id, string name, string location)
+        {
+            var userid = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userName = User.FindFirstValue(ClaimTypes.Name);
+            //string userid =HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var input = new Trails { UserId = userid, Location = location, Name = userName };
+            _db.Add(input);
+            _db.SaveChanges();
 
+            //var loginData =  user in _db.Users
+            //                where user.UserName.Equals(userName)
+            //                select user;
+
+            return RedirectToAction("Search");
+        }
 
         public IActionResult Search()
         {
