@@ -47,7 +47,7 @@ namespace FinalProject.Models
             //this.ImgSqSmall = t["imgSqSmall"].ToString();
             this.ImgSmallMed = t["imgSmallMed"].ToString();
             //this.ImgSmall = t["imgSmall"].ToString();
-           // this.ImgMedium = t["imgMedium"].ToString();
+            // this.ImgMedium = t["imgMedium"].ToString();
             //this.Length = decimal.Parse(t["length"].ToString());
             //this.Ascent = int.Parse(t["ascent"].ToString());
             //this.Descent = int.Parse(t["descent"].ToString());
@@ -57,8 +57,6 @@ namespace FinalProject.Models
             //this.Latitude = decimal.Parse(t["latitude"].ToString());
             //this.ConditionStatus = t["conditionStatus"].ToString();
             //this.ConditionDetails = t["conditionDetails"].ToString();
-
-
 
 
         }
