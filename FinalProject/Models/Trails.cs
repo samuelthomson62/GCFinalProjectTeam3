@@ -4,7 +4,7 @@ namespace FinalProject.Models
 {
     public class Trails
     {
-        //public int Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Summary { get; set; }
         public string Difficulty { get; set; }
@@ -27,6 +27,9 @@ namespace FinalProject.Models
         //public string ConditionStatus { get; set; }
         //public string ConditionDetails { get; set; }
         //public Datetime ConditionDate { get; set; }
+        public virtual ApplicationUser User { get; set; }
+        public string UserId { get; set; }
+
 
         public Trails()
         {
@@ -34,7 +37,7 @@ namespace FinalProject.Models
         }
         public Trails(JToken t)
         {
-            //this.Id = t["id"];
+            this.Id = int.Parse(t["id"].ToString());
             this.Name = t["name"].ToString();
             this.Summary = t["summary"].ToString();
             this.Difficulty = t["difficulty"].ToString();

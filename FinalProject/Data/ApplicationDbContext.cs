@@ -20,6 +20,8 @@ namespace FinalProject.Data
         }
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
         public DbSet<ApplicationUser> UserLevel { get; set; }
+        public DbSet<Trails> Trails { get; set; }
+
 
     }
 }
