@@ -1,10 +1,55 @@
 ﻿@model IEnumerable<FinalProject.Models.Trails>
 
+@{
+    ViewData["Title"] = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
 <p>
-    @foreach (var item in Model)
-    {
-    <p>@item.Name</p>
+</p>
+<table class="table">
 
-
-
-}</p>
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Location)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Location)
+                </td>
+                <td>
+                    <form action="AddToBucketList">
+                        <input type="text" name="id" value=" @Html.DisplayFor(modelItem => item.Id)" />
+                        <input type="hidden" name="name" value=" @Html.DisplayFor(modelItem => item.Name)" />
+                        <input type="hidden" name="location" value=" @Html.DisplayFor(modelItem => item.Location)" />
+                        <input type="submit" value="Save" />
+                    </form>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<p>@ViewBag.Email</p>
