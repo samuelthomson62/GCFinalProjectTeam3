@@ -17,7 +17,7 @@ namespace FinalProject.Models
         public string ImgSmallMed { get; set; }
         //public string ImgMedium { get; set; }
 
-        //public decimal Length { get; set; }
+        public decimal Length { get; set; }
         //public int Ascent { get; set; }
         //public int Descent { get; set; }
         //public int High { get; set; }
@@ -48,7 +48,7 @@ namespace FinalProject.Models
             this.ImgSmallMed = t["imgSmallMed"].ToString();
             //this.ImgSmall = t["imgSmall"].ToString();
             // this.ImgMedium = t["imgMedium"].ToString();
-            //this.Length = decimal.Parse(t["length"].ToString());
+            this.Length = decimal.Parse(t["length"].ToString());
             //this.Ascent = int.Parse(t["ascent"].ToString());
             //this.Descent = int.Parse(t["descent"].ToString());
             //this.High = int.Parse(t["high"].ToString());
