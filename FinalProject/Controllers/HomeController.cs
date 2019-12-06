@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using System.Linq;
 using System;
 using System.Security.Claims;
-using Newtonsoft.Json.Linq;
 
 namespace FinalProject.Controllers
 {
@@ -286,38 +285,60 @@ namespace FinalProject.Controllers
             return difficulty;
         }
 
+        //public async Task<IActionResult> TrailsDetail(int? id)
 
+        //    {
+        //        {
+        //            if (id == null)
+        //            {
+        //                return NotFound();
+        //            }
 
-        public IActionResult AddToBucketList(int id, string name, string location)
-        {
+        //            var trails = await _db.Trails
+        //                .Include(t => t.User)
+        //                .FirstOrDefaultAsync(m => m.Id == id);
+        //            if (trails == null)
+        //            {
+        //                return NotFound();
+        //            }
 
-            List<Trails> trail = TrailDAL.GetResults(name,location);
+        //            return View(trails);
+        //        }
+        //    }
 
-
-            if (trail != null)
-            {
-                var userid = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                var userName = User.FindFirstValue(ClaimTypes.Name);
-                //string userid =HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                var input = new Trails { UserId = userid, Location = location, Name = userName };
-                _db.Add(input);
-                _db.SaveChanges();
-                return RedirectToAction(nameof(BucketList));
-
-
-            }
-            else
-            {
-                return RedirectToAction(nameof(Search));
-            }
-
-
-        }
-
-        public IActionResult BucketList()
+        public IActionResult TrailsDetail()
         {
             return View();
         }
+
+
+
+
+        public IActionResult AddToBucketList( string name, string location, string summary, string image, decimal length)
+        {
+            //var userid = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            //var userName = User.FindFirstValue(ClaimTypes.Name);
+            //string userid =HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var input = new Trails { UserId = User.Identity.Name, Location = location, Name = name, Summary= summary, ImgSmallMed=image, Length=length };
+            _db.Add(input);
+            _db.SaveChanges();
+
+            //var loginData =  user in _db.Users
+            //                where user.UserName.Equals(userName)
+            //                select user;
+
+            return View();       }
+
+        public async Task<IActionResult> BucketList()
+        {
+            return View(await _db.Trails.ToListAsync());
+        }
+
+
+        //public IActionResult BucketList()
+        //{
+        //    return View();
+        //}
         public IActionResult Search()
         {
             string Difficulty = UserLevel();
