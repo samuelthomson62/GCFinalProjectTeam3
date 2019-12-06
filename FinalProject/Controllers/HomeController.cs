@@ -9,6 +9,8 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Linq;
 using System;
+using System.Security.Claims;
+using Newtonsoft.Json.Linq;
 
 namespace FinalProject.Controllers
 {
@@ -286,8 +288,36 @@ namespace FinalProject.Controllers
 
 
 
+        public IActionResult AddToBucketList(int id, string name, string location)
+        {
+
+            List<Trails> trail = TrailDAL.GetResults(name,location);
 
 
+            if (trail != null)
+            {
+                var userid = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var userName = User.FindFirstValue(ClaimTypes.Name);
+                //string userid =HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                var input = new Trails { UserId = userid, Location = location, Name = userName };
+                _db.Add(input);
+                _db.SaveChanges();
+                return RedirectToAction(nameof(BucketList));
+
+
+            }
+            else
+            {
+                return RedirectToAction(nameof(Search));
+            }
+
+
+        }
+
+        public IActionResult BucketList()
+        {
+            return View();
+        }
         public IActionResult Search()
         {
             string Difficulty = UserLevel();
