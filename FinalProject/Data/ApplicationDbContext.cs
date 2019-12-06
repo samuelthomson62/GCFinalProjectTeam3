@@ -4,18 +4,22 @@ using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using FinalProject.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace FinalProject.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
+        public ApplicationDbContext()
+        {
+        }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
-
-        public DbSet<ApplicationUser> TimesDoneBefore { get; set; }
-        public DbSet<ApplicationUser> BodyBuild { get; set; }
-        public DbSet<ApplicationUser> PreExistingCondition { get; set; }
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
+        public DbSet<ApplicationUser> UserLevel { get; set; }
+        public DbSet<Trails> Trails { get; set; }
     }
 }
