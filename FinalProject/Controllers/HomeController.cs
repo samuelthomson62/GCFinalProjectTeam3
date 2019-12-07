@@ -306,9 +306,11 @@ namespace FinalProject.Controllers
         //        }
         //    }
 
-        public IActionResult TrailsDetail()
+        public IActionResult TrailsDetail(int Id)
         {
-            return View();
+            //We have to call the API again to get the trail we want to save.
+            Trails x = TrailDAL.GetTrailById(Id);
+            return View(x);
         }
 
 
