@@ -1,15 +1,12 @@
 using FinalProject.Data;
 using FinalProject.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using System.Linq;
-using System;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace FinalProject.Controllers
 {
@@ -321,7 +318,7 @@ namespace FinalProject.Controllers
             //var userid = User.FindFirstValue(ClaimTypes.NameIdentifier);
             //var userName = User.FindFirstValue(ClaimTypes.Name);
             string id = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var input = new Trails { UserId = id, Location = location, Name = name, Summary= summary, ImgSmallMed=image, Length=length };
+            var input = new Trails { UserId = id, Location = location, Name = name, Summary = summary, ImgSmallMed = image, Length = length };
             _db.Add(input);
             _db.SaveChanges();
 
@@ -329,7 +326,8 @@ namespace FinalProject.Controllers
             //                where user.UserName.Equals(userName)
             //                select user;
 
-            return View();       }
+            return RedirectToAction(nameof(BucketList));
+        }
 
         public async Task<IActionResult> BucketList()
         {
@@ -353,89 +351,6 @@ namespace FinalProject.Controllers
         public IActionResult Privacy()
         {
             return View();
-        }
-            public string UserLevel(int times, string build, string preExisting)
-        {
-            string uLevel = "";
-            if (build == "overweight" || build == "average")
-            {
-                if (times <= 3)
-                {
-
-                    uLevel = "green";
-
-                }
-                if (times >= 5 && times >= 3)
-                {
-                    if (preExisting == "y")
-
-                    {
-                        uLevel = "green";
-                    }
-
-                    else
-                    {
-                        uLevel = "greenBlue";
-                    }
-
-                }
-            }
-            if (build == "average" || build == "athletic")
-            {
-                if (times >= 8)
-                {
-                    if (preExisting == "Y" && build == "average")
-                    {
-                        uLevel = "greenBlue";
-                    }
-                    else
-                    {
-                        uLevel = "blue";
-                    }
-                }
-
-                if (times >= 10)
-                {
-                    if (preExisting == "y" && build == "average")
-                    {
-                        uLevel = "blue";
-                    }
-                    else
-                    {
-                        uLevel = "blueBlack";
-                    }
-                }
-                if (times >= 15)
-                {
-                    if (preExisting == "y" && build == "average")
-                    {
-                        uLevel = "blueBlack";
-                    }
-                    else
-                    {
-                        uLevel = "Black";
-                    }
-                }
-            }
-                    return uLevel;
-                
-            
-        }
-
-        public IActionResult AddToBucketList(int id, string name, string location)
-        {
-            var userid = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var userName = User.FindFirstValue(ClaimTypes.Name);
-            //string userid =HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var input = new Trails { UserId = userid, Location = location, Name = userName };
-            _db.Add(input);
-            _db.SaveChanges();
-
-            //var loginData =  user in _db.Users
-            //                where user.UserName.Equals(userName)
-            //                select user;
-
-            return RedirectToAction("Search");
         }
 
 
