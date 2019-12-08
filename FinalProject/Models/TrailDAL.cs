@@ -66,5 +66,21 @@ namespace FinalProject.Models
             }
             return Result;
         }
+        //Created this method below to call for TrailsDetail -Sammyboy <3
+        public static Trails GetTrailById(int Id)
+        {
+            HttpWebRequest request = WebRequest.CreateHttp($"https://www.hikingproject.com/data/get-trails-by-id?ids={Id}&key=200641663-d6ba0e012de562cebaf18e1d1874a93f");
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            StreamReader rd = new StreamReader(response.GetResponseStream());
+            string APItext = rd.ReadToEnd();
+            JToken t = JToken.Parse(APItext);
+
+            //sorry, I understand this line is weird. Even though this is a diferent API URL, it still returns a list with one object in it.
+            //I have to grab the first object of that list to get the Trails model to convert the properties propperly
+            List<JToken> x = t["trails"].ToList();
+            Trails myTrail = new Trails(x[0]);
+
+            return myTrail;
+        }
     }
 }

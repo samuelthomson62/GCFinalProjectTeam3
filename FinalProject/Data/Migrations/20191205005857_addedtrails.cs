@@ -2,7 +2,7 @@
 
 namespace FinalProject.Data.Migrations
 {
-    public partial class addingdatabase : Migration
+    public partial class addedtrails : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
