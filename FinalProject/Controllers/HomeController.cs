@@ -316,12 +316,12 @@ namespace FinalProject.Controllers
 
 
 
-        public IActionResult AddToBucketList( string name, string location, string summary, string image, decimal length)
+        public IActionResult AddToBucketList(string Id, string name, string location, string summary, string image, decimal length)
         {
             //var userid = User.FindFirstValue(ClaimTypes.NameIdentifier);
             //var userName = User.FindFirstValue(ClaimTypes.Name);
-            //string userid =HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var input = new Trails { UserId = User.Identity.Name, Location = location, Name = name, Summary= summary, ImgSmallMed=image, Length=length };
+            string id = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var input = new Trails { UserId = id, Location = location, Name = name, Summary= summary, ImgSmallMed=image, Length=length };
             _db.Add(input);
             _db.SaveChanges();
 
