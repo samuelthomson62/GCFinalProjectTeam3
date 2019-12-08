@@ -285,14 +285,43 @@ namespace FinalProject.Controllers
             return difficulty;
         }
 
+        //public async Task<IActionResult> TrailsDetail(int? id)
 
+        //    {
+        //        {
+        //            if (id == null)
+        //            {
+        //                return NotFound();
+        //            }
 
-        public IActionResult AddToBucketList(int id, string name, string location)
+        //            var trails = await _db.Trails
+        //                .Include(t => t.User)
+        //                .FirstOrDefaultAsync(m => m.Id == id);
+        //            if (trails == null)
+        //            {
+        //                return NotFound();
+        //            }
+
+        //            return View(trails);
+        //        }
+        //    }
+
+        public IActionResult TrailsDetail(int Id)
         {
-            var userid = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var userName = User.FindFirstValue(ClaimTypes.Name);
+            //We have to call the API again to get the trail we want to save.
+            Trails x = TrailDAL.GetTrailById(Id);
+            return View(x);
+        }
+
+
+
+
+        public IActionResult AddToBucketList( string name, string location, string summary, string image, decimal length)
+        {
+            //var userid = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            //var userName = User.FindFirstValue(ClaimTypes.Name);
             //string userid =HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var input = new Trails { UserId = userid, Location = location, Name = userName };
+            var input = new Trails { UserId = User.Identity.Name, Location = location, Name = name, Summary= summary, ImgSmallMed=image, Length=length };
             _db.Add(input);
             _db.SaveChanges();
 
@@ -300,9 +329,18 @@ namespace FinalProject.Controllers
             //                where user.UserName.Equals(userName)
             //                select user;
 
-            return RedirectToAction("Search");
+            return View();       }
+
+        public async Task<IActionResult> BucketList()
+        {
+            return View(await _db.Trails.ToListAsync());
         }
 
+
+        //public IActionResult BucketList()
+        //{
+        //    return View();
+        //}
         public IActionResult Search()
         {
             string Difficulty = UserLevel();
