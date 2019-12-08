@@ -65,6 +65,7 @@ namespace FinalProject.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
             [Required]
+
             public int TimesDoneBefore { get; set; }
             [Required]
             public string BodyBuild { get; set; }
@@ -77,6 +78,7 @@ namespace FinalProject.Areas.Identity.Pages.Account
             [Required]
             public string ZipCode { get; set; }
 
+            public string didifficulty { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -99,7 +101,8 @@ namespace FinalProject.Areas.Identity.Pages.Account
                     PreExistingCondition= Input.PreExistingCondition,
                     City= Input.City, 
                     State= Input.State,
-                    ZipCode= Input.ZipCode
+                    ZipCode= Input.ZipCode,
+                  
 
                 }; 
                 var result = await _userManager.CreateAsync(user, Input.Password);

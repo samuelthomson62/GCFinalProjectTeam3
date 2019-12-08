@@ -4,7 +4,7 @@ namespace FinalProject.Models
 {
     public class Trails
     {
-        //public int Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Summary { get; set; }
         public string Difficulty { get; set; }
@@ -17,7 +17,7 @@ namespace FinalProject.Models
         public string ImgSmallMed { get; set; }
         //public string ImgMedium { get; set; }
 
-        //public decimal Length { get; set; }
+        public decimal Length { get; set; }
         //public int Ascent { get; set; }
         //public int Descent { get; set; }
         //public int High { get; set; }
@@ -27,14 +27,19 @@ namespace FinalProject.Models
         //public string ConditionStatus { get; set; }
         //public string ConditionDetails { get; set; }
         //public Datetime ConditionDate { get; set; }
+        public virtual ApplicationUser User { get; set; }
+        public string UserId { get; set; }
+
 
         public Trails()
         {
+            //ApplicationUser me = new ApplicationUser();
+            //this.User = me;
 
         }
         public Trails(JToken t)
         {
-            //this.Id = t["id"];
+            this.Id = int.Parse(t["id"].ToString());
             this.Name = t["name"].ToString();
             this.Summary = t["summary"].ToString();
             this.Difficulty = t["difficulty"].ToString();
@@ -44,8 +49,8 @@ namespace FinalProject.Models
             //this.ImgSqSmall = t["imgSqSmall"].ToString();
             this.ImgSmallMed = t["imgSmallMed"].ToString();
             //this.ImgSmall = t["imgSmall"].ToString();
-           // this.ImgMedium = t["imgMedium"].ToString();
-            //this.Length = decimal.Parse(t["length"].ToString());
+            // this.ImgMedium = t["imgMedium"].ToString();
+            this.Length = decimal.Parse(t["length"].ToString());
             //this.Ascent = int.Parse(t["ascent"].ToString());
             //this.Descent = int.Parse(t["descent"].ToString());
             //this.High = int.Parse(t["high"].ToString());
@@ -54,8 +59,6 @@ namespace FinalProject.Models
             //this.Latitude = decimal.Parse(t["latitude"].ToString());
             //this.ConditionStatus = t["conditionStatus"].ToString();
             //this.ConditionDetails = t["conditionDetails"].ToString();
-
-
 
 
         }
