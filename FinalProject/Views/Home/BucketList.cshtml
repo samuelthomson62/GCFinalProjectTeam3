@@ -7,9 +7,7 @@
 
 <h1>BucketList</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
@@ -48,8 +46,11 @@
                 <td>
 
                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+
                 </td>
             </tr>
         }
     </tbody>
+
 </table>
+<a asp-action="Search">Back to List</a>
