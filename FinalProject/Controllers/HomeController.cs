@@ -1,15 +1,12 @@
 using FinalProject.Data;
 using FinalProject.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using System.Linq;
-using System;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace FinalProject.Controllers
 {
@@ -316,12 +313,12 @@ namespace FinalProject.Controllers
 
 
 
-        public IActionResult AddToBucketList( string name, string location, string summary, string image, decimal length)
+        public IActionResult AddToBucketList(string Id, string name, string location, string summary, string image, decimal length)
         {
             //var userid = User.FindFirstValue(ClaimTypes.NameIdentifier);
             //var userName = User.FindFirstValue(ClaimTypes.Name);
-            //string userid =HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var input = new Trails { UserId = User.Identity.Name, Location = location, Name = name, Summary= summary, ImgSmallMed=image, Length=length };
+            string id = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var input = new Trails { UserId = id, Location = location, Name = name, Summary = summary, ImgSmallMed = image, Length = length };
             _db.Add(input);
             _db.SaveChanges();
 
@@ -329,7 +326,8 @@ namespace FinalProject.Controllers
             //                where user.UserName.Equals(userName)
             //                select user;
 
-            return View();       }
+            return RedirectToAction(nameof(BucketList));
+        }
 
         public async Task<IActionResult> BucketList()
         {

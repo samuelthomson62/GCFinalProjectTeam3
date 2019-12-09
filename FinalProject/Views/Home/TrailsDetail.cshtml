@@ -54,6 +54,6 @@
     </dl>
 </div>
 <div>
-    @*Html.ActionLink("Adding", "AddToBucketList", new {Name = @Model.Name, Location = Model.Location,  Summary= Model.Summary, Image= Model.ImgSmallMed, Length=Model.Length});*@
-    <a asp-action="Index">Back to List</a>
+    @Html.ActionLink("Adding", "AddToBucketList", new {Name = @Model.Name, Location = Model.Location,  Summary= Model.Summary, Image= Model.ImgSmallMed, Length=Model.Length});
+    <a asp-action="Search">Back to List</a>
 </div>
