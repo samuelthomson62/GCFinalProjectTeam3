@@ -334,6 +334,40 @@ namespace FinalProject.Controllers
             return View(await _db.Trails.ToListAsync());
         }
 
+        //Get
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var trails = await _db.Trails
+                .FirstOrDefaultAsync(t => t.Id == id);
+            if (trails == null)
+            {
+                return NotFound();
+            }
+
+            return View(trails);
+        }
+
+        //post
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var trails = await _db.Trails.FindAsync(id);
+            _db.Trails.Remove(trails);
+            await _db.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        //var trails = await _context.Trails.FindAsync(id);
+        //_context.Trails.Remove(trails);
+        //    await _context.SaveChangesAsync();
+        //    return RedirectToAction(nameof(Index));
+
 
         //public IActionResult BucketList()
         //{
