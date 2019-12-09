@@ -1,87 +1,94 @@
 using FinalProject.Data;
 using FinalProject.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using System.Linq;
-using System;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace FinalProject.Controllers
 {
     public class HomeController : Controller
     {
 
-        ApplicationDbContext db = new ApplicationDbContext();
-      
-
-
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ApplicationDbContext _db;
+        public HomeController(ApplicationDbContext db)
         {
-            _logger = logger;
+            _db = db;
         }
 
-        public IActionResult Index(ApplicationUser U )
+
+
+        //private readonly ILogger<HomeController> _logger;
+
+        //public HomeController(ILogger<HomeController> logger)
+        //{
+        //    _logger = logger;
+        //}
+
+        public IActionResult Index()
         {
-           // var build= GetBuild().ToString();
-            //string Difficulty = db.difficulty;
-            //ViewBag.Build = "Use is: " +User.Identity.Name;
-            //ViewBag.difficulty = "zipcode is:"+U.ZipCode;
-            //ViewBag.Name = "build is: " + U.BodyBuild;
+
+            //var build = GetBuild() ;
+            //var times = GetTimes();
+            //string Condition =GetPreExisitingCondition();
+            //ViewBag.Name = "Use is: " + User.Identity.Name;
+            //ViewBag.difficulty = "Condition is:" + Condition;
+            //ViewBag.Build = "build is: " + build;
+            //ViewBag.Build = "times is: " + times;
+
+            //var level = UserLevel();
+            //ViewBag.UserLevel = "LEvel is:" + level;
             return View();
         }
 
         public string GetBuild()
         {
-            List<ApplicationUser> users = new List<ApplicationUser>();
 
-            var U = User.Identity.Name;
-            //string database = "aspnet-FinalProject-48EBCA49-0A7A-4503-967D-42A0DA7D99CD";
-            var bodybuild = from n in users
-                            where n.UserName == U
-                            select  n.BodyBuild;
+            var bodybuild = from n in _db.UserLevel
+                            where n.UserName == User.Identity.Name
+                            select n.BodyBuild;
 
-            
-
-            return bodybuild.ToString();
+            return bodybuild.Single();
         }
-        public string GetTimes()
+        public int GetTimes()
         {
-            List<ApplicationUser> users = new List<ApplicationUser>();
+            var Times = from n in _db.UserLevel
+                        where n.UserName == User.Identity.Name
+                        select n.TimesDoneBefore;
 
-            var U = User.Identity.Name;
-            var T = from n in users
-                                           where n.UserName == U
-                                           select n.TimesDoneBefore;
 
-            int Times = T;
-
-            return Times;
+            return Times.Single();
         }
         public string GetPreExisitingCondition()
         {
-            List<ApplicationUser> users = new List<ApplicationUser>();
 
-            var U = User.Identity.Name;
-            //string database = "aspnet-FinalProject-48EBCA49-0A7A-4503-967D-42A0DA7D99CD";
-            var condition = from n in users
-                            where n.UserName == U
+            var condition = from n in _db.UserLevel
+                            where n.UserName == User.Identity.Name
                             select n.PreExistingCondition;
 
-           
-            return condition.ToString();
+
+            return condition.Single();
         }
+        public string GetState()
+        {
+
+            var state = from n in _db.UserLevel
+                        where n.UserName == User.Identity.Name
+                        select n.City;
+
+
+            return state.Single();
+        }
+
 
         public string UserLevel()
         {
-            string PreExistingCondition = GetPreExisitingCondition();
-            int BodyBuild = GetBuild();
-            string TimesDoneBefore = GetTimes();
+            var PreExistingCondition = GetPreExisitingCondition();
+            var BodyBuild = GetBuild();
+            var TimesDoneBefore = 5;
             string difficulty = "";
             //-----------------------------------No preexisting Condition--------------------------------------------
             if (PreExistingCondition == "n")
@@ -97,17 +104,17 @@ namespace FinalProject.Controllers
                     }
                     if (TimesDoneBefore >= 4 && TimesDoneBefore <= 6)
                     {
-                        difficulty = "greeBlue";
+                        difficulty = "greenBlue";
                         return difficulty;
                     }
                     if (TimesDoneBefore >= 7 && TimesDoneBefore <= 8)
                     {
-                        difficulty = "greeBlue";
+                        difficulty = "greenBlue";
                         return difficulty;
                     }
                     if (TimesDoneBefore >= 9 && TimesDoneBefore <= 10)
                     {
-                        difficulty = "greeBlue";
+                        difficulty = "greenBlue";
                         return difficulty;
                     }
                     if (TimesDoneBefore >= 11 && TimesDoneBefore <= 15)
@@ -132,12 +139,12 @@ namespace FinalProject.Controllers
                     }
                     if (TimesDoneBefore >= 4 && TimesDoneBefore <= 6)
                     {
-                        difficulty = "greeBlue";
+                        difficulty = "greenBlue";
                         return difficulty;
                     }
                     if (TimesDoneBefore >= 7 && TimesDoneBefore <= 8)
                     {
-                        difficulty = "greeBlue";
+                        difficulty = "greenBlue";
                         return difficulty;
                     }
                     if (TimesDoneBefore >= 9 && TimesDoneBefore <= 10)
@@ -163,7 +170,7 @@ namespace FinalProject.Controllers
                     }
                     if (TimesDoneBefore >= 1 && TimesDoneBefore <= 3)
                     {
-                        difficulty = "greeBlue";
+                        difficulty = "greenBlue";
                         return difficulty;
                     }
                     if (TimesDoneBefore >= 4 && TimesDoneBefore <= 6)
@@ -202,7 +209,7 @@ namespace FinalProject.Controllers
                     }
                     if (TimesDoneBefore >= 7 && TimesDoneBefore <= 10)
                     {
-                        difficulty = "greeBlue";
+                        difficulty = "greenBlue";
                         return difficulty;
                     }
 
@@ -222,7 +229,7 @@ namespace FinalProject.Controllers
                     }
                     if (TimesDoneBefore >= 4 && TimesDoneBefore <= 6)
                     {
-                        difficulty = "greeBlue";
+                        difficulty = "greenBlue";
                         return difficulty;
                     }
                     if (TimesDoneBefore >= 7 && TimesDoneBefore <= 8)
@@ -251,7 +258,7 @@ namespace FinalProject.Controllers
                     }
                     if (TimesDoneBefore >= 1 && TimesDoneBefore <= 3)
                     {
-                        difficulty = "greeBlue";
+                        difficulty = "greenBlue";
                         return difficulty;
                     }
                     if (TimesDoneBefore >= 4 && TimesDoneBefore <= 10)
@@ -274,17 +281,70 @@ namespace FinalProject.Controllers
             }
             return difficulty;
         }
-    
+
+        //public async Task<IActionResult> TrailsDetail(int? id)
+
+        //    {
+        //        {
+        //            if (id == null)
+        //            {
+        //                return NotFound();
+        //            }
+
+        //            var trails = await _db.Trails
+        //                .Include(t => t.User)
+        //                .FirstOrDefaultAsync(m => m.Id == id);
+        //            if (trails == null)
+        //            {
+        //                return NotFound();
+        //            }
+
+        //            return View(trails);
+        //        }
+        //    }
+
+        public IActionResult TrailsDetail(int Id)
+        {
+            //We have to call the API again to get the trail we want to save.
+            Trails x = TrailDAL.GetTrailById(Id);
+            return View(x);
+        }
 
 
 
 
-    public IActionResult Search(string Id )
+        public IActionResult AddToBucketList(string Id, string name, string location, string summary, string image, decimal length)
+        {
+            //var userid = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            //var userName = User.FindFirstValue(ClaimTypes.Name);
+            string id = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var input = new Trails { UserId = id, Location = location, Name = name, Summary = summary, ImgSmallMed = image, Length = length };
+            _db.Add(input);
+            _db.SaveChanges();
+
+            //var loginData =  user in _db.Users
+            //                where user.UserName.Equals(userName)
+            //                select user;
+
+            return RedirectToAction(nameof(BucketList));
+        }
+
+        public async Task<IActionResult> BucketList()
+        {
+            return View(await _db.Trails.ToListAsync());
+        }
+
+
+        //public IActionResult BucketList()
+        //{
+        //    return View();
+        //}
+        public IActionResult Search()
         {
             string Difficulty = UserLevel();
+            string state = GetState();
 
-
-            List<Trails> trail = TrailDAL.GetResults(Id, Difficulty);
+            List<Trails> trail = TrailDAL.GetResults(state, Difficulty);
             return View(trail);
         }
 
@@ -293,8 +353,8 @@ namespace FinalProject.Controllers
             return View();
         }
 
-       
-        
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
