@@ -341,11 +341,19 @@ namespace FinalProject.Controllers
         //}
         public IActionResult Search()
         {
-            string Difficulty = UserLevel();
-            string state = GetState();
+   if (User.Identity.IsAuthenticated)
+            {
+                string Difficulty = UserLevel();
+                string state = GetState();
 
-            List<Trails> trail = TrailDAL.GetResults(state, Difficulty);
-            return View(trail);
+                List<Trails> trail = TrailDAL.GetResults(state, Difficulty);
+                return View(trail);
+            }
+
+            else
+            {
+                return RedirectToAction("./Identity/Account/Login");
+            }
         }
 
         public IActionResult Privacy()
