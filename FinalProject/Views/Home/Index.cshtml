@@ -1,28 +1,71 @@
 
+@{
+    ViewData["Title"] = "Home Page";
+}
+    <form method="get" asp-action="GeneralSearch">
 
-<h2>Search Trails by Name</h2>
 
-<form asp-action="Search">
-    <p>See Result:</p>
-    @*<input name="Id" type="text" />*@
+        <div class="search">
 
-    @*<p>Difficulty:</p>
-        <input name="Difficulty" type="text"/>*@
-    <input type="submit" />
+            <input type="text" name="state" placeholder="Search for Trails" required />
+            <input type="submit"/>
+        </div>
+     
+       </form>
+<style>
 
-    @*<p>@ViewBag.UserLevel</p>
-    <p>@ViewBag.times</p>
-    <p>@ViewBag.Build</p>
+    .search {
+        padding-top: 64px;
+    }
+    
+    &__title {
+        font-size: 22px;
+        font-weight: 900;
+        text-align: center;
+        color: #ff8b88;
+    }
+    
+    &__input {
+        width: 100%;
+        padding: 12px 24px;
 
-    <p>@ViewBag.Name</p>
-    <p>@ViewBag.difficulty</p>
+        background-color: transparent;
+        transition: transform 250ms ease-in-out;
+        font-size: 14px;
+        line-height: 18px;
+        
+    
+        background-color: transparent;
+
+ 
+      
+        background-repeat: no-repeat;
+        background-size: 18px 18px;
+        background-position: 95% center;
+        border-radius: 50px;
+        border: 1px solid #575756;
+        transition: all 250ms ease-in-out;
+        backface-visibility: hidden;
+        transform-style: preserve-3d;
+        
+        &::placeholder {
+            color: color(#575756 a(0.8));
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        
+        &:hover,
+        &:focus {
+            padding: 12px 0;
+            outline: 0;
+            border: 1px solid transparent;
+            border-bottom: 1px solid #575756;
+            border-radius: 0;
+            background-position: 100% center;
+        }
+    
+
+
 
     
-    <p>@ViewBag.Build</p>*@
-
-
-</form>
-<p>
-    <a asp-action="listo">Listo</a>
-</p>
-
+</style>
