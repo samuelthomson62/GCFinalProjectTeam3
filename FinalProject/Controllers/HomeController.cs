@@ -11,6 +11,7 @@ using System.Linq;
 using System;
 using System.Security.Claims;
 
+
 namespace FinalProject.Controllers
 {
     public class HomeController : Controller
@@ -316,20 +317,20 @@ namespace FinalProject.Controllers
 
 
 
-        public IActionResult AddToBucketList( string name, string location, string summary, string image, decimal length)
+        public IActionResult AddToBucketList(string Id, string name, string location, string summary, string image, decimal length)
         {
             //var userid = User.FindFirstValue(ClaimTypes.NameIdentifier);
             //var userName = User.FindFirstValue(ClaimTypes.Name);
-            //string userid =HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var input = new Trails { UserId = User.Identity.Name, Location = location, Name = name, Summary= summary, ImgSmallMed=image, Length=length };
+            string id = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var input = new Trails { UserId = id, Location = location, Name = name, Summary = summary, ImgSmallMed = image, Length = length };
             _db.Add(input);
             _db.SaveChanges();
 
-            //var loginData =  user in _db.Users
-            //                where user.UserName.Equals(userName)
-            //                select user;
+           
 
-            return View();       }
+            return RedirectToAction(nameof(BucketList));
+        }
+
 
         public async Task<IActionResult> BucketList()
         {
@@ -342,17 +343,20 @@ namespace FinalProject.Controllers
         //    return View();
         //}
         public IActionResult Search()
-        {
-            string Difficulty = UserLevel();
-            string state = GetState();
+     {
+            if (User.Identity.IsAuthenticated)
+            {
+                string Difficulty = UserLevel();
+                string state = GetState();
 
-            List<Trails> trail = TrailDAL.GetResults(state, Difficulty);
-            return View(trail);
-        }
+                List<Trails> trail = TrailDAL.GetResults(state, Difficulty);
+                return View(trail);
+            }
 
-        public IActionResult Privacy()
-        {
-            return View();
+            else
+            {
+                return RedirectToAction("./Identity/Account/Login");
+            }
         }
             public string UserLevel(int times, string build, string preExisting)
         {
@@ -436,7 +440,7 @@ namespace FinalProject.Controllers
             //                select user;
 
             return RedirectToAction("Search");
-        }
+}
 
 
 
