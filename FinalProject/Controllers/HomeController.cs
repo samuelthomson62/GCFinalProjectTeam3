@@ -1,5 +1,6 @@
 using FinalProject.Data;
 using FinalProject.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -322,9 +323,7 @@ namespace FinalProject.Controllers
             _db.Add(input);
             _db.SaveChanges();
 
-            //var loginData =  user in _db.Users
-            //                where user.UserName.Equals(userName)
-            //                select user;
+
 
             return RedirectToAction(nameof(BucketList));
         }
@@ -373,13 +372,24 @@ namespace FinalProject.Controllers
         //{
         //    return View();
         //}
+        [Authorize]
         public IActionResult Search()
         {
-            string Difficulty = UserLevel();
-            string state = GetState();
-
-            List<Trails> trail = TrailDAL.GetResults(state, Difficulty);
-            return View(trail);
+            if (User.Identity.IsAuthenticated)
+            {
+                string Difficulty = UserLevel();
+                string state = GetState();
+                List<Trails> trail = TrailDAL.GetResults(state, Difficulty);
+                return View(trail);
+            }
+            else
+            {
+                return RedirectToAction("./Identity/Account/Login");
+            }
+        }
+        public IActionResult BucketListDateModal()  //Get
+        {
+            return View();
         }
 
         public IActionResult Privacy()
