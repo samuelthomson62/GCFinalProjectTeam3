@@ -3,26 +3,21 @@ using FinalProject.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using System.Linq;
-using System;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace FinalProject.Controllers
 {
     public class HomeController : Controller
     {
-
         private readonly ApplicationDbContext _db;
         public HomeController(ApplicationDbContext db)
         {
             _db = db;
         }
-
-
 
         //private readonly ILogger<HomeController> _logger;
 
@@ -30,23 +25,20 @@ namespace FinalProject.Controllers
         //{
         //    _logger = logger;
         //}
-
-        public IActionResult Index()
+        public IActionResult Index( )
         {
-
-            //var build = GetBuild() ;
-            //var times = GetTimes();
-            //string Condition =GetPreExisitingCondition();
-            //ViewBag.Name = "Use is: " + User.Identity.Name;
-            //ViewBag.difficulty = "Condition is:" + Condition;
-            //ViewBag.Build = "build is: " + build;
-            //ViewBag.Build = "times is: " + times;
-
-            //var level = UserLevel();
-            //ViewBag.UserLevel = "LEvel is:" + level;
-            return View();
+          return View();
         }
 
+        public IActionResult Recomendations()
+        {
+            return View();
+        }
+        public IActionResult GeneralSearch(string state)
+        {
+             List<Trails> trail = TrailDAL.GetResults(state);
+            return View(trail);
+        }
         public string GetBuild()
         {
 
@@ -77,16 +69,11 @@ namespace FinalProject.Controllers
         }
         public string GetState()
         {
-
             var state = from n in _db.UserLevel
                         where n.UserName == User.Identity.Name
-                        select n.City;
-
-
+                        select n.State;
             return state.Single();
         }
-
-
         public string UserLevel()
         {
             var PreExistingCondition = GetPreExisitingCondition();
@@ -284,163 +271,88 @@ namespace FinalProject.Controllers
             }
             return difficulty;
         }
-
-        //public async Task<IActionResult> TrailsDetail(int? id)
-
-        //    {
-        //        {
-        //            if (id == null)
-        //            {
-        //                return NotFound();
-        //            }
-
-        //            var trails = await _db.Trails
-        //                .Include(t => t.User)
-        //                .FirstOrDefaultAsync(m => m.Id == id);
-        //            if (trails == null)
-        //            {
-        //                return NotFound();
-        //            }
-
-        //            return View(trails);
-        //        }
-        //    }
-
-        public IActionResult TrailsDetail(int Id)
+         public IActionResult TrailsDetail(int Id)
         {
             //We have to call the API again to get the trail we want to save.
             Trails x = TrailDAL.GetTrailById(Id);
             return View(x);
         }
-
-
-
-
-        public IActionResult AddToBucketList(string Id, string name, string location, string summary, string image, decimal length)
+ 
+        [Authorize]
+        public IActionResult AddToBucketList( string name, string location, string summary, string image, decimal length, string date)
         {
-            //var userid = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            //var userName = User.FindFirstValue(ClaimTypes.Name);
-            string id = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var input = new Trails { UserId = id, Location = location, Name = name, Summary= summary, ImgSmallMed=image, Length=length };
-            _db.Add(input);
-            _db.SaveChanges();
+            if (User.Identity.IsAuthenticated)
+            {
+                string id = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                var input = new Trails { UserId = id, Location = location, Name = name, Summary = summary, ImgSmallMed = image, Length = length, Date = date};
+                _db.Add(input);
+                _db.SaveChanges();
 
-            //var loginData =  user in _db.Users
-            //                where user.UserName.Equals(userName)
-            //                select user;
+                return RedirectToAction(nameof(BucketList));
+            }
+            else
+            {
+                return RedirectToAction("./Identity/Account/Login");
 
-            return View();       }
-
+            }
+        }
         public async Task<IActionResult> BucketList()
         {
             return View(await _db.Trails.ToListAsync());
         }
-
-
-        //public IActionResult BucketList()
-        //{
-        //    return View();
-        //}
+      [Authorize]
         public IActionResult Search()
         {
-            string Difficulty = UserLevel();
-            string state = GetState();
+            if (User.Identity.IsAuthenticated)
+            {
+                string Difficulty = UserLevel();
+                string state = GetState();
 
-            List<Trails> trail = TrailDAL.GetResults(state, Difficulty);
-            return View(trail);
+                List<Trails> trail = TrailDAL.GetResults(state, Difficulty);
+                return View(trail);
+            }
+
+            else
+            {
+                return RedirectToAction("./Identity/Account/Login");
+            }
         }
 
-        public IActionResult Privacy()
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var trails = await _db.Trails
+                .FirstOrDefaultAsync(t => t.Id == id);
+            if (trails == null)
+            {
+                return NotFound();
+            }
+
+            return View(trails);
+        }
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var trails = await _db.Trails.FindAsync(id);
+            _db.Trails.Remove(trails);
+            await _db.SaveChangesAsync();
+            return RedirectToAction(nameof(BucketList));
+        }
+        public IActionResult BucketListDateModal()  
         {
             return View();
         }
-            public string UserLevel(int times, string build, string preExisting)
+       public IActionResult Privacy()
         {
-            string uLevel = "";
-            if (build == "overweight" || build == "average")
-            {
-                if (times <= 3)
-                {
-
-                    uLevel = "green";
-
-                }
-                if (times >= 5 && times >= 3)
-                {
-                    if (preExisting == "y")
-
-                    {
-                        uLevel = "green";
-                    }
-
-                    else
-                    {
-                        uLevel = "greenBlue";
-                    }
-
-                }
-            }
-            if (build == "average" || build == "athletic")
-            {
-                if (times >= 8)
-                {
-                    if (preExisting == "Y" && build == "average")
-                    {
-                        uLevel = "greenBlue";
-                    }
-                    else
-                    {
-                        uLevel = "blue";
-                    }
-                }
-
-                if (times >= 10)
-                {
-                    if (preExisting == "y" && build == "average")
-                    {
-                        uLevel = "blue";
-                    }
-                    else
-                    {
-                        uLevel = "blueBlack";
-                    }
-                }
-                if (times >= 15)
-                {
-                    if (preExisting == "y" && build == "average")
-                    {
-                        uLevel = "blueBlack";
-                    }
-                    else
-                    {
-                        uLevel = "Black";
-                    }
-                }
-            }
-                    return uLevel;
-                
-            
+            return View();
         }
 
-        public IActionResult AddToBucketList(int id, string name, string location)
-        {
-            var userid = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var userName = User.FindFirstValue(ClaimTypes.Name);
-            //string userid =HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var input = new Trails { UserId = userid, Location = location, Name = userName };
-            _db.Add(input);
-            _db.SaveChanges();
-
-            //var loginData =  user in _db.Users
-            //                where user.UserName.Equals(userName)
-            //                select user;
-
-            return RedirectToAction("Search");
-        }
-
-
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
