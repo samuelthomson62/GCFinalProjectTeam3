@@ -1,4 +1,4 @@
-﻿@model IEnumerable<FinalProject.Models.Trails>
+@model IEnumerable<FinalProject.Models.Trails>
 
 @{
     ViewData["Title"] = "BucketList";
@@ -16,11 +16,15 @@
             </th>
 
             <th>
-                @Html.DisplayNameFor(model => model.Difficulty)
+                Miles
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Location)
             </th>
+            <th>
+                Date
+            </th>
+
 
 
 
@@ -30,25 +34,28 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Difficulty)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Location)
-                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Length) 
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
 
 
-                <td>
+            <td>
 
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
 
-                </td>
-            </tr>
+            </td>
+        </tr>
         }
     </tbody>
 

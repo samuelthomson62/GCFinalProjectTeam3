@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Linq;
 
 namespace FinalProject.Models
 {
@@ -18,6 +18,8 @@ namespace FinalProject.Models
         //public string ImgMedium { get; set; }
 
         public decimal Length { get; set; }
+
+        public  string Date {get; set;}
         //public int Ascent { get; set; }
         //public int Descent { get; set; }
         //public int High { get; set; }
@@ -59,7 +61,7 @@ namespace FinalProject.Models
             //this.Latitude = decimal.Parse(t["latitude"].ToString());
             //this.ConditionStatus = t["conditionStatus"].ToString();
             //this.ConditionDetails = t["conditionDetails"].ToString();
-
+           
 
         }
     }
