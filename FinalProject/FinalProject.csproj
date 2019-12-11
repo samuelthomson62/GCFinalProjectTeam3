@@ -5,6 +5,10 @@
     <UserSecretsId>aspnet-FinalProject-48EBCA49-0A7A-4503-967D-42A0DA7D99CD</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="Views\Home\Recomendations.cshtml" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.0.0" />
@@ -24,6 +28,11 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Controllers\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="Views\Home\Recomendations.cshtml" />
   </ItemGroup>
 
 </Project>
