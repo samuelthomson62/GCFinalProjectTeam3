@@ -1,59 +1,159 @@
-﻿@model FinalProject.Models.Trails
+@model FinalProject.Models.Trails
 
 @{
     ViewData["Title"] = "TrailsDetail";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
 
-<h1>TrailsDetail</h1>
+        /* Modal Content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
 
-<div>
-    <h4>Trails</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Summary)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Summary)
-        </dd>
+        /* The Close Button */
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
 
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Location)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Location)
-        </dd>
-        
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Length)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Length)
-        </dd>
-        
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ImgSmallMed)
-        </dt>
-        <dd class="col-sm-10">
-              <img src="@Model.ImgSmallMed" alt="Italian Trulli" width="auto" height="300" />
-        </dd>
+            .close:hover,
+            .close:focus {
+                color: #000;
+                text-decoration: none;
+                cursor: pointer;
+            }
+    </style>
+</head>
+<body>
 
-    </dl>
-</div>
-<div>
-    @Html.ActionLink("Adding", "AddToBucketList", new {Name = @Model.Name, Location = Model.Location,  Summary= Model.Summary, Image= Model.ImgSmallMed, Length=Model.Length});
-    <a asp-action="Search">Back to List</a>
-</div>
+    <div>
+        <h4>Trails</h4>
+        <hr />
+        <dl class="row">
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Summary)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Summary)
+            </dd>
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Location)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Location)
+            </dd>
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Length) 
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Length) Miles
+            </dd>
+            
+            <dd class="col-sm-2">
+
+                <img src="@Model.ImgSmallMed" alt="Italian Trulli" width="auto" height="200" />
+            </dd>
+
+        </dl>
+    </div>
+    <div>
+        <button id="myBtn">Add To Bucket</button>
+
+        @*@Html.ActionLink("Adding", "AddToBucketList", new { Name = @Model.Name, Location = Model.Location, Summary = Model.Summary, Image = Model.ImgSmallMed, Length = Model.Length });*@
+        <button asp-action="Search">Back to List</button>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Trigger/Open The Modal -->
+        <!-- The Modal -->
+
+        <form method="get" asp-action="AddToBucketList">
+            <div id="myModal" class="modal">
+                <div class="col-sm-4">    </div>
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+
+                    <div class="form-group">
+                        <input type="date" placeholder="enter Date" class="form-control" id="text" name="date" />
+                    </div>
+
+            @Html.ActionLink("Add to Bucket List", "AddToBucketList", 
+             new {
+                 name = @Model.Name, 
+                 location = @Model.Location,
+                 summary = @Model.Summary, 
+                 image = @Model.ImgSmallMed, 
+                 length = @Model.Length
+                 }) 
+            <button class="btn btn-default" data-dismiss="modal" id="btnCancel"> Cancel</button>
+                </div>
+            </div>
+        </form>
+
+
+        <script>
+            // Get the modal
+            var modal = document.getElementById("myModal");
+
+            // Get the button that opens the modal
+            var btn = document.getElementById("myBtn");
+
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[0];
+
+
+
+            // When the user clicks the button, open the modal
+            btn.onclick = function () {
+                modal.style.display = "block";
+            }
+
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function () {
+                modal.style.display = "none";
+            }
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        </script>
+
+</body>
+</html>
