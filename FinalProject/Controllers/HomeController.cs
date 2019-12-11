@@ -288,13 +288,18 @@ namespace FinalProject.Controllers
                 _db.Add(input);
                 _db.SaveChanges();
 
-                return RedirectToAction(nameof(BucketList));
+                return RedirectToAction(nameof(Confirm));
             }
             else
             {
                 return RedirectToAction("./Identity/Account/Login");
 
             }
+        }
+
+        public IActionResult Confirm()
+        {
+            return View();
         }
         public async Task<IActionResult> BucketList()
         {
