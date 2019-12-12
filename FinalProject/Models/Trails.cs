@@ -37,8 +37,6 @@ namespace FinalProject.Models
 
         public Trails()
         {
-            //ApplicationUser me = new ApplicationUser();
-            //this.User = me;
 
         }
         public Trails(JToken t)

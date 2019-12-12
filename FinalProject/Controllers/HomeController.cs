@@ -81,14 +81,14 @@ namespace FinalProject.Controllers
         {
             var PreExistingCondition = GetPreExisitingCondition();
             var BodyBuild = GetBuild();
-            var TimesDoneBefore = 5;
+            var TimesDoneBefore = GetTimes();
             string difficulty = "";
             //-----------------------------------No preexisting Condition--------------------------------------------
             if (PreExistingCondition == "n")
             {
 
-                // Plump____________________________________________________
-                if (BodyBuild == "plump")
+                // Unathletic____________________________________________________
+                if (BodyBuild == "unathletic")
                 {
                     if (TimesDoneBefore <= 3)
                     {
@@ -192,8 +192,8 @@ namespace FinalProject.Controllers
             //-----------------------------------with preexisting Condition--------------------------------------------
             if (PreExistingCondition == "y")
             {
-                // Plump____________________________________________________
-                if (BodyBuild == "plump")
+                // Unathletic____________________________________________________
+                if (BodyBuild == "unathletic")
                 {
                     if (TimesDoneBefore <= 6)
                     {
@@ -418,10 +418,20 @@ namespace FinalProject.Controllers
         {
             return View();
         }
-             
-        public async Task<IActionResult> BucketList()
+         
+        public IActionResult BucketList()
         {
-            return View(await _db.Trails.ToListAsync());
+            string id = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            List<Trails> all = _db.Trails.ToList();
+            List<Trails> yours = new List<Trails>();
+            foreach (Trails t in all)
+            {
+                if (t.UserId == id.ToString())
+                {
+                    yours.Add(t);
+                }
+            }
+            return View(yours);
         }
       [Authorize]
         public IActionResult Search()
