@@ -283,7 +283,7 @@ namespace FinalProject.Controllers
 
         public IActionResult AddCheckMark(int? id)
             {
-
+            var completeMark = "https://solidwize.com/wp-content/uploads/2012/04/Green-Check-Mark.jpg";
             var checkmark =
                 from n in _db.Trails
                 where n.Id == id
@@ -291,47 +291,54 @@ namespace FinalProject.Controllers
 
             foreach (Trails bl in checkmark)
             {
-                bl.CompleteMark = "https://solidwize.com/wp-content/uploads/2012/04/Green-Check-Mark.jpg";
-                // Insert any additional changes to column values.
+                if (completeMark== bl.CompleteMark)
+                {
+                    //TODO: Add a view that says is already completed if you want to add this 
+                    return RedirectToAction(nameof(AlreadyMarkedCompleted));
+                }
+
+                else
+                {
+                    bl.CompleteMark = completeMark;
+                    var user = from n in _db.UserLevel
+                               where n.UserName == User.Identity.Name
+                               select n;
+
+                    foreach (ApplicationUser u in user)
+                    {
+                        int current = u.TimesDoneBefore;
+                        u.TimesDoneBefore = current + 1;
+                        // Insert any additional changes to column values.
+                    }
+                    try
+                    {
+                        _db.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                        // Provide for exceptions.
+                    }
+                }
             }
 
-            // Submit the changes to the database.
             try
-            {
-                _db.SaveChanges();
-            }
+            { _db.SaveChanges(); }
             catch (Exception e)
-            {
-                Console.WriteLine(e);
-                // Provide for exceptions.
-            }
-
-            var user = from n in _db.UserLevel
-                        where n.UserName == User.Identity.Name
-                        select n;
-
-            foreach (ApplicationUser bl in user)
-            {
-                int current = bl.TimesDoneBefore;
-                bl.TimesDoneBefore = current+1;
-                // Insert any additional changes to column values.
-            }
-            try
-            {
-                _db.SaveChanges();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                // Provide for exceptions.
-            }
+            { Console.WriteLine(e);}    
 
             _db.SaveChanges();
-
              return  RedirectToAction(nameof(BucketList));
             }
+
+        public IActionResult AlreadyMarkedCompleted()
+        {
+            return View();
+        }
         public IActionResult MarkIncomplete(int? id)
         {
+            var incompleteMark = "https://www.trzcacak.rs/myfile/detail/51-515377_x-mark-transparent-background-png-x.png";
+
 
             var checkmark =
                 from n in _db.Trails
@@ -340,11 +347,36 @@ namespace FinalProject.Controllers
 
             foreach (Trails bl in checkmark)
             {
-                bl.CompleteMark = "https://www.trzcacak.rs/myfile/detail/51-515377_x-mark-transparent-background-png-x.png";
-                // Insert any additional changes to column values.
+                if (incompleteMark==bl.CompleteMark)
+                {
+                    return RedirectToAction(nameof(BucketList));
+
+                }
+                else
+                {
+                    bl.CompleteMark = incompleteMark;
+                    var user = from n in _db.UserLevel
+                               where n.UserName == User.Identity.Name
+                               select n;
+
+                    foreach (ApplicationUser u in user)
+                    {
+                        int current = u.TimesDoneBefore;
+                        u.TimesDoneBefore = current - 1;
+                    }
+                    try
+                    {
+                        _db.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                    }
+
+
+                }
             }
 
-            // Submit the changes to the database.
             try
             {
                 _db.SaveChanges();
@@ -352,28 +384,8 @@ namespace FinalProject.Controllers
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                // Provide for exceptions.
             }
-            var user = from n in _db.UserLevel
-                       where n.UserName == User.Identity.Name
-                       select n;
-
-            foreach (ApplicationUser bl in user)
-            {
-                int current = bl.TimesDoneBefore;
-                bl.TimesDoneBefore = current-1;
-                // Insert any additional changes to column values.
-            }
-            try
-            {
-                _db.SaveChanges();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                // Provide for exceptions.
-            }
-
+           
             _db.SaveChanges();
 
             return RedirectToAction(nameof(BucketList));
