@@ -97,26 +97,37 @@
         <!-- Trigger/Open The Modal -->
         <!-- The Modal -->
 
-        <form method="get" asp-action="AddToBucketList">
+        <form method="post" asp-action="AddToBucketList">
             <div id="myModal" class="modal">
                 <div class="col-sm-4">    </div>
                 <!-- Modal content -->
                 <div class="modal-content">
                     <span class="close">&times;</span>
-
                     <div class="form-group">
                         <input type="date" placeholder="enter Date" class="form-control" id="text" name="date" />
                     </div>
 
-            @Html.ActionLink("Add to Bucket List", "AddToBucketList", 
-             new {
-                 name = @Model.Name, 
-                 location = @Model.Location,
-                 summary = @Model.Summary, 
-                 image = @Model.ImgSmallMed, 
-                 length = @Model.Length
-                 }) 
-            <button class="btn btn-default" data-dismiss="modal" id="btnCancel"> Cancel</button>
+                    @Html.Hidden("name", @Model.Name)
+                    @Html.Hidden("location", @Model.Location)
+                    @Html.Hidden("summary", @Model.Summary)
+                    @Html.Hidden("image", @Model.ImgSmallMed)
+                    @Html.Hidden("length", @Model.Length)
+ 
+                    <button>
+
+                        Add To Bucket List
+                        @*@Html.ActionLink("Add to Bucket List", "AddToBucketList",
+                            new
+                      {
+                          name = @Model.Name,
+                          location = @Model.Location,
+                          summary = @Model.Summary,
+                          image = @Model.ImgSmallMed,
+                          length = @Model.Length
+                  }*@
+              )
+                    </button>
+                    <button class="btn btn-default" data-dismiss="modal" id="btnCancel"> Cancel</button>
                 </div>
             </div>
         </form>

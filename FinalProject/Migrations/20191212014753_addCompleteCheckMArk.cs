@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace FinalProject.Data.Migrations
+namespace FinalProject.Migrations
 {
-    public partial class addedtrails : Migration
+    public partial class addCompleteCheckMArk : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
