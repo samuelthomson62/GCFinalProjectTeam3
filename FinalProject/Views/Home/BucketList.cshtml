@@ -24,6 +24,9 @@
             <th>
                 Date
             </th>
+            <th>
+                Status
+            </th>
 
             <th></th>
         </tr>
@@ -31,25 +34,30 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Length)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Location)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Date)
-                </td>
-                <td>
-                    <a asp-action="Delete" asp-route-id="@item.Id">Mark Complete</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Length)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                <img src="@item.CompleteMark" alt="checkmark" width="auto" height="50" />
+            </td>
+            <td>
+
+                <a asp-action="AddCheckMark" asp-route-id="@item.Id"> Complete</a>
+                <a asp-action="MarkIncomplete" asp-route-id="@item.Id"> Incomplete</a>
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

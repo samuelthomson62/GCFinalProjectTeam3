@@ -28,9 +28,9 @@ namespace FinalProject.Controllers
         //{
         //    _logger = logger;
         //}
-        public IActionResult Index( )
+        public IActionResult Index()
         {
-          return View();
+            return View();
         }
 
         public IActionResult Recomendations()
@@ -39,7 +39,7 @@ namespace FinalProject.Controllers
         }
         public IActionResult GeneralSearch(string state)
         {
-             List<Trails> trail = TrailDAL.GetResults(state);
+            List<Trails> trail = TrailDAL.GetResults(state);
             return View(trail);
         }
         public string GetBuild()
@@ -274,22 +274,120 @@ namespace FinalProject.Controllers
             }
             return difficulty;
         }
-         public IActionResult TrailsDetail(int Id)
+        public IActionResult TrailsDetail(int Id)
         {
             //We have to call the API again to get the trail we want to save.
             Trails x = TrailDAL.GetTrailById(Id);
             return View(x);
         }
-        
- 
+
+        public IActionResult AddCheckMark(int? id)
+            {
+
+            var checkmark =
+                from n in _db.Trails
+                where n.Id == id
+                select n;
+
+            foreach (Trails bl in checkmark)
+            {
+                bl.CompleteMark = "https://solidwize.com/wp-content/uploads/2012/04/Green-Check-Mark.jpg";
+                // Insert any additional changes to column values.
+            }
+
+            // Submit the changes to the database.
+            try
+            {
+                _db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                // Provide for exceptions.
+            }
+
+            var user = from n in _db.UserLevel
+                        where n.UserName == User.Identity.Name
+                        select n;
+
+            foreach (ApplicationUser bl in user)
+            {
+                int current = bl.TimesDoneBefore;
+                bl.TimesDoneBefore = current+1;
+                // Insert any additional changes to column values.
+            }
+            try
+            {
+                _db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                // Provide for exceptions.
+            }
+
+            _db.SaveChanges();
+
+             return  RedirectToAction(nameof(BucketList));
+            }
+        public IActionResult MarkIncomplete(int? id)
+        {
+
+            var checkmark =
+                from n in _db.Trails
+                where n.Id == id
+                select n;
+
+            foreach (Trails bl in checkmark)
+            {
+                bl.CompleteMark = "https://www.trzcacak.rs/myfile/detail/51-515377_x-mark-transparent-background-png-x.png";
+                // Insert any additional changes to column values.
+            }
+
+            // Submit the changes to the database.
+            try
+            {
+                _db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                // Provide for exceptions.
+            }
+            var user = from n in _db.UserLevel
+                       where n.UserName == User.Identity.Name
+                       select n;
+
+            foreach (ApplicationUser bl in user)
+            {
+                int current = bl.TimesDoneBefore;
+                bl.TimesDoneBefore = current-1;
+                // Insert any additional changes to column values.
+            }
+            try
+            {
+                _db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                // Provide for exceptions.
+            }
+
+            _db.SaveChanges();
+
+            return RedirectToAction(nameof(BucketList));
+        }
+
         [Authorize]
         [HttpPost]
         public IActionResult AddToBucketList( string name, string location, string summary, string image, decimal length, string date)
         {
             if (User.Identity.IsAuthenticated)
             {
+                string status = "https://www.trzcacak.rs/myfile/detail/51-515377_x-mark-transparent-background-png-x.png";
                 string id = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                var input = new Trails { UserId = id, Location = location, Name = name, Summary = summary, ImgSmallMed = image, Length = length, Date=date};
+                var input = new Trails { UserId = id, Location = location, Name = name, Summary = summary, ImgSmallMed = image, Length = length, Date=date, CompleteMark=status};
 
 
                 _db.Add(input);

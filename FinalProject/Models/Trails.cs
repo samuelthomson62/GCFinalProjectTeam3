@@ -20,7 +20,7 @@ namespace FinalProject.Models
         public decimal Length { get; set; }
 
         public  string Date {get; set;}
-     //   public string Status { get; set; }
+        public string CompleteMark { get; set; }
 
         //public int Ascent { get; set; }
         //public int Descent { get; set; }

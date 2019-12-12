@@ -106,7 +106,6 @@
                 <!-- Modal content -->
                 <div class="modal-content">
                     <span class="close">&times;</span>
-
                     <div class="form-group">
                         <input type="date" placeholder="enter Date" class="form-control" id="text" name="date" />
                     </div>
@@ -118,7 +117,9 @@
                     @Html.Hidden("length", @Model.Length)
  
                     <button>
-                        @Html.ActionLink("Add to Bucket List", "AddToBucketList",
+
+                        Add To Bucket List
+                        @*@Html.ActionLink("Add to Bucket List", "AddToBucketList",
                             new
                       {
                           name = @Model.Name,
@@ -126,7 +127,7 @@
                           summary = @Model.Summary,
                           image = @Model.ImgSmallMed,
                           length = @Model.Length
-                  }
+                  }*@
               )
                     </button>
                     <button class="btn btn-default" data-dismiss="modal" id="btnCancel"> Cancel</button>
