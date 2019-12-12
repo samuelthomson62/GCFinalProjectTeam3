@@ -20,6 +20,8 @@ namespace FinalProject.Models
         public decimal Length { get; set; }
 
         public  string Date {get; set;}
+        public string CompleteMark { get; set; }
+
         //public int Ascent { get; set; }
         //public int Descent { get; set; }
         //public int High { get; set; }
@@ -35,8 +37,6 @@ namespace FinalProject.Models
 
         public Trails()
         {
-            //ApplicationUser me = new ApplicationUser();
-            //this.User = me;
 
         }
         public Trails(JToken t)
