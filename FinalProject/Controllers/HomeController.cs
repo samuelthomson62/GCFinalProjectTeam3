@@ -87,8 +87,8 @@ namespace FinalProject.Controllers
             if (PreExistingCondition == "n")
             {
 
-                // Plump____________________________________________________
-                if (BodyBuild == "plump")
+                // Unathletic____________________________________________________
+                if (BodyBuild == "unathletic")
                 {
                     if (TimesDoneBefore <= 3)
                     {
@@ -192,8 +192,8 @@ namespace FinalProject.Controllers
             //-----------------------------------with preexisting Condition--------------------------------------------
             if (PreExistingCondition == "y")
             {
-                // Plump____________________________________________________
-                if (BodyBuild == "plump")
+                // Unathletic____________________________________________________
+                if (BodyBuild == "unathletic")
                 {
                     if (TimesDoneBefore <= 6)
                     {
