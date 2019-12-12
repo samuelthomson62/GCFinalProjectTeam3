@@ -2,21 +2,18 @@
 
 namespace FinalProject.Migrations
 {
-    public partial class some : Migration
+    public partial class addingcompletemark : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+           
+
             migrationBuilder.AddColumn<string>(
-                name: "Date",
+                name: "CompleteMark",
                 table: "Trails",
                 nullable: true);
         }
 
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropColumn(
-                name: "Date",
-                table: "Trails");
-        }
+        
     }
 }

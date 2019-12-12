@@ -24,7 +24,6 @@
             background-color: rgb(0,0,0); /* Fallback color */
             background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
         }
-
         /* Modal Content */
         .modal-content {
             background-color: #fefefe;
@@ -33,7 +32,6 @@
             border: 1px solid #888;
             width: 80%;
         }
-
         /* The Close Button */
         .close {
             color: #aaaaaa;
@@ -41,7 +39,6 @@
             font-size: 28px;
             font-weight: bold;
         }
-
             .close:hover,
             .close:focus {
                 color: #000;
@@ -100,26 +97,37 @@
         <!-- Trigger/Open The Modal -->
         <!-- The Modal -->
 
-        <form method="get" asp-action="AddToBucketList">
+        <form method="post" asp-action="AddToBucketList">
             <div id="myModal" class="modal">
                 <div class="col-sm-4">    </div>
                 <!-- Modal content -->
                 <div class="modal-content">
                     <span class="close">&times;</span>
-
                     <div class="form-group">
                         <input type="date" placeholder="enter Date" class="form-control" id="text" name="date" />
                     </div>
 
-            @Html.ActionLink("Add to Bucket List", "AddToBucketList", 
-             new {
-                 name = @Model.Name, 
-                 location = @Model.Location,
-                 summary = @Model.Summary, 
-                 image = @Model.ImgSmallMed, 
-                 length = @Model.Length
-                 }) 
-            <button class="btn btn-default" data-dismiss="modal" id="btnCancel"> Cancel</button>
+                    @Html.Hidden("name", @Model.Name)
+                    @Html.Hidden("location", @Model.Location)
+                    @Html.Hidden("summary", @Model.Summary)
+                    @Html.Hidden("image", @Model.ImgSmallMed)
+                    @Html.Hidden("length", @Model.Length)
+ 
+                    <button>
+
+                        Add To Bucket List
+                        @*@Html.ActionLink("Add to Bucket List", "AddToBucketList",
+                            new
+                      {
+                          name = @Model.Name,
+                          location = @Model.Location,
+                          summary = @Model.Summary,
+                          image = @Model.ImgSmallMed,
+                          length = @Model.Length
+                  }*@
+              )
+                    </button>
+                    <button class="btn btn-default" data-dismiss="modal" id="btnCancel"> Cancel</button>
                 </div>
             </div>
         </form>
@@ -128,25 +136,18 @@
         <script>
             // Get the modal
             var modal = document.getElementById("myModal");
-
             // Get the button that opens the modal
             var btn = document.getElementById("myBtn");
-
             // Get the <span> element that closes the modal
             var span = document.getElementsByClassName("close")[0];
-
-
-
             // When the user clicks the button, open the modal
             btn.onclick = function () {
                 modal.style.display = "block";
             }
-
             // When the user clicks on <span> (x), close the modal
             span.onclick = function () {
                 modal.style.display = "none";
             }
-
             // When the user clicks anywhere outside of the modal, close it
             window.onclick = function (event) {
                 if (event.target == modal) {
