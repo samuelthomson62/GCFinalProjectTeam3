@@ -171,6 +171,7 @@ namespace FinalProject.Migrations
                     Location = table.Column<string>(nullable: true),
                     ImgSmallMed = table.Column<string>(nullable: true),
                     Length = table.Column<decimal>(nullable: false),
+                    Date = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>

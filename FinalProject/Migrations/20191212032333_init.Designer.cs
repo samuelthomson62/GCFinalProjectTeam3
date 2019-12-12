@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace FinalProject.Data.Migrations
+namespace FinalProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191205015323_added trail")]
-    partial class addedtrail
+    [Migration("20191212032333_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,11 +28,17 @@ namespace FinalProject.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Difficulty")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImgSmallMed")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Length")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Location")
                         .HasColumnType("nvarchar(max)");
