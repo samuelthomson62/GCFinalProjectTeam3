@@ -1,10 +1,8 @@
 ﻿using Newtonsoft.Json.Linq;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
 
 namespace FinalProject.Models
 {
@@ -16,8 +14,9 @@ namespace FinalProject.Models
         {
             //this method uses the MapQuest API to convert a string location like "Grand Rapids, MI" to Latitude and Longitude for the Hiking API
             // this method has been tested and works -Sam <3
-            
-            HttpWebRequest request = WebRequest.CreateHttp($"http://www.mapquestapi.com/geocoding/v1/address?key=RAeJl9of0cOtFhtd9VtoGGI8jUAvaG4l&location={location}");
+            string apiKey1 = Secret.APIkey1;
+
+            HttpWebRequest request = WebRequest.CreateHttp($"http://www.mapquestapi.com/geocoding/v1/address?key={apiKey1}&location={location}");
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             StreamReader rd = new StreamReader(response.GetResponseStream());
             string APItext = rd.ReadToEnd();
@@ -28,8 +27,11 @@ namespace FinalProject.Models
         public static List<Trails> GetResults(string location)
         {
             // this method runs the Hiking API and returns a list of Trails
+
+            string apiKey2 = Secret.APIkey2;
+
             LatLng l = GetLatLng(location);
-            HttpWebRequest request = WebRequest.CreateHttp($"https://www.hikingproject.com/data/get-trails?lat={l.Lat}&lon={l.Lng}&maxDistance=200&maxResult=100&key=200641663-d6ba0e012de562cebaf18e1d1874a93f");
+            HttpWebRequest request = WebRequest.CreateHttp($"https://www.hikingproject.com/data/get-trails?lat={l.Lat}&lon={l.Lng}&maxDistance=200&maxResult=100&key={apiKey2}");
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             StreamReader rd = new StreamReader(response.GetResponseStream());
             string APItext = rd.ReadToEnd();
@@ -47,8 +49,9 @@ namespace FinalProject.Models
         // Gonna overload GetResults
         public static List<Trails> GetResults(string location, string difficulty)
         {
+            string apiKey2 = Secret.APIkey2;
             LatLng l = GetLatLng(location);
-            HttpWebRequest request = WebRequest.CreateHttp($"https://www.hikingproject.com/data/get-trails?lat={l.Lat}&lon={l.Lng}&maxDistance=200&maxResult=100&key=200641663-d6ba0e012de562cebaf18e1d1874a93f");
+            HttpWebRequest request = WebRequest.CreateHttp($"https://www.hikingproject.com/data/get-trails?lat={l.Lat}&lon={l.Lng}&maxDistance=200&maxResult=100&key={apiKey2}");
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             StreamReader rd = new StreamReader(response.GetResponseStream());
             string APItext = rd.ReadToEnd();
@@ -58,7 +61,7 @@ namespace FinalProject.Models
             List<JToken> x = t["trails"].ToList();
             foreach (JToken y in x)
             {
-                if(y["difficulty"].ToString() == difficulty)
+                if (y["difficulty"].ToString() == difficulty)
                 {
                     Trails z = new Trails(y);
                     Result.Add(z);
@@ -69,7 +72,8 @@ namespace FinalProject.Models
         //Created this method below to call for TrailsDetail -Sammyboy <3
         public static Trails GetTrailById(int Id)
         {
-            HttpWebRequest request = WebRequest.CreateHttp($"https://www.hikingproject.com/data/get-trails-by-id?ids={Id}&key=200641663-d6ba0e012de562cebaf18e1d1874a93f");
+            string apiKey2 = Secret.APIkey2;
+            HttpWebRequest request = WebRequest.CreateHttp($"https://www.hikingproject.com/data/get-trails-by-id?ids={Id}&key={apiKey2}");
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             StreamReader rd = new StreamReader(response.GetResponseStream());
             string APItext = rd.ReadToEnd();
