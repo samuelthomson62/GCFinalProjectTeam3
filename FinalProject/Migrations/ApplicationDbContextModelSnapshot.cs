@@ -44,6 +44,9 @@ namespace FinalProject.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Summary")
                         .HasColumnType("nvarchar(max)");
 

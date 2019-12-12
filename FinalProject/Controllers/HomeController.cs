@@ -2,12 +2,15 @@ using FinalProject.Data;
 using FinalProject.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System;
+
 
 namespace FinalProject.Controllers
 {
@@ -277,14 +280,18 @@ namespace FinalProject.Controllers
             Trails x = TrailDAL.GetTrailById(Id);
             return View(x);
         }
+        
  
         [Authorize]
+        [HttpPost]
         public IActionResult AddToBucketList( string name, string location, string summary, string image, decimal length, string date)
         {
             if (User.Identity.IsAuthenticated)
             {
                 string id = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                var input = new Trails { UserId = id, Location = location, Name = name, Summary = summary, ImgSmallMed = image, Length = length, Date = date};
+                var input = new Trails { UserId = id, Location = location, Name = name, Summary = summary, ImgSmallMed = image, Length = length, Date=date};
+
+
                 _db.Add(input);
                 _db.SaveChanges();
 
@@ -301,6 +308,7 @@ namespace FinalProject.Controllers
         {
             return View();
         }
+             
         public async Task<IActionResult> BucketList()
         {
             return View(await _db.Trails.ToListAsync());
@@ -356,11 +364,16 @@ namespace FinalProject.Controllers
         {
             return View();
         }
+        private bool TrailsExists(int id)
+        {
+            return _db.Trails.Any(e => e.Id == id);
+        }
 
-     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
+
 }
