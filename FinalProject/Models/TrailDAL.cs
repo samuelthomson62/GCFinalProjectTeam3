@@ -10,8 +10,6 @@ namespace FinalProject.Models
 {
     public class TrailDAL
     {
-
-
         public static LatLng GetLatLng(string location)
         {
             //this method uses the MapQuest API to convert a string location like "Grand Rapids, MI" to Latitude and Longitude for the Hiking API
@@ -78,7 +76,6 @@ namespace FinalProject.Models
             //I have to grab the first object of that list to get the Trails model to convert the properties propperly
             List<JToken> x = t["trails"].ToList();
             Trails myTrail = new Trails(x[0]);
-
             return myTrail;
         }
     }

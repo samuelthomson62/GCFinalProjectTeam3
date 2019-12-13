@@ -6,7 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Views\Home\Recomendations.cshtml" />
+    <Compile Remove="Views\BucketList\**" />
+    <Content Remove="Views\BucketList\**" />
+    <EmbeddedResource Remove="Views\BucketList\**" />
+    <None Remove="Views\BucketList\**" />
   </ItemGroup>
 
 
@@ -28,12 +31,6 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Controllers\" />
-    <Folder Include="Views\BucketList\" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <None Include="Views\Home\Recomendations.cshtml" />
   </ItemGroup>
 
 </Project>

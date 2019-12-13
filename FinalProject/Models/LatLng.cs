@@ -14,7 +14,6 @@ namespace FinalProject.Models
         {
 
         }
-
         public LatLng(JToken j)
         {
             this.Lat = j["results"][0]["locations"][0]["latLng"]["lat"].ToString();
