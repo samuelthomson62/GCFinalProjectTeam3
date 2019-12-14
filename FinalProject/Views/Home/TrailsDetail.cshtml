@@ -88,10 +88,10 @@
 
         </dl>
     </div>
+    <p>Weather: @ViewBag.Forcast.Headline</p>
     <div>
         <button id="myBtn">Add To Bucket</button>
 
-        @*@Html.ActionLink("Adding", "AddToBucketList", new { Name = @Model.Name, Location = Model.Location, Summary = Model.Summary, Image = Model.ImgSmallMed, Length = Model.Length });*@
         <button asp-action="Search">Back to List</button>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Trigger/Open The Modal -->
@@ -155,6 +155,5 @@
                 }
             }
         </script>
-
 </body>
 </html>
