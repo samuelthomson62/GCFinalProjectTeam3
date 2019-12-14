@@ -78,5 +78,26 @@ namespace FinalProject.Models
             Trails myTrail = new Trails(x[0]);
             return myTrail;
         }
+        public static int AccuweatherGetLocationKey(LatLng l)
+        {
+            HttpWebRequest request = WebRequest.CreateHttp($"http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey={Secret.AccuKey}&q={l.Lat},{l.Lng}");
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            StreamReader rd = new StreamReader(response.GetResponseStream());
+            string APItext = rd.ReadToEnd();
+            JToken t = JToken.Parse(APItext);
+            return int.Parse(t["Key"].ToString());
+        }
+        public static Forcast AccuweatherGetForcast(string Location)
+        {
+            LatLng l = GetLatLng(Location);
+            int locationKey = AccuweatherGetLocationKey(l);
+            HttpWebRequest request = WebRequest.CreateHttp($"http://dataservice.accuweather.com/forecasts/v1/daily/5day/{locationKey}?apikey={Secret.AccuKey}");
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            StreamReader rd = new StreamReader(response.GetResponseStream());
+            string APItext = rd.ReadToEnd();
+            JToken t = JToken.Parse(APItext);
+            Forcast f = new Forcast(t);
+            return f;
+        }
     }
 }

@@ -22,7 +22,6 @@ namespace FinalProject.Models
         public virtual ApplicationUser User { get; set; }
         public string UserId { get; set; }
 
-
         public Trails()
         {
 
