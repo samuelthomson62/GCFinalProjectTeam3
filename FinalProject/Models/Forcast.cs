@@ -36,7 +36,7 @@ namespace FinalProject.Models
             DateTime o = new DateTime(int.Parse(dateOnly[0]), int.Parse(dateOnly[1]), int.Parse(dateOnly[2]));
             this.Date = o;
 
-            this.DayOfWeek = o.DayOfWeek.ToString();
+            this.DayOfWeek = o.ToString("ddd");
         }
     }
 }
