@@ -14,6 +14,8 @@ namespace FinalProject.Models
         public string Description { get; set; }
         public string Clouds { get; set; }
         public string WindSpeed { get; set; }
+        public DateTime Date { get; set; }
+        public string DayOfWeek { get; set; }
         public Forcast()
         {
 
@@ -26,6 +28,15 @@ namespace FinalProject.Models
             this.Description = j["weather"][0]["description"].ToString();
             this.Clouds = j["clouds"]["all"].ToString();
             this.WindSpeed = j["wind"]["speed"].ToString();
+
+            string daytime = j["dt_txt"].ToString();
+            // daytime looks like "2019-12-15 18:00:00"
+            string[] bothHalfs = daytime.Split(" ");
+            string[] dateOnly = bothHalfs[0].Split("-");
+            DateTime o = new DateTime(int.Parse(dateOnly[0]), int.Parse(dateOnly[1]), int.Parse(dateOnly[2]));
+            this.Date = o;
+
+            this.DayOfWeek = o.DayOfWeek.ToString();
         }
     }
 }
