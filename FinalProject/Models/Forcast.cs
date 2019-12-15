@@ -8,14 +8,16 @@ namespace FinalProject.Models
 {
     public class Forcast
     {
-        public string Headline { get; set; }
+        public string CurrentTemp { get; set; }
+        public string CurrentFeelsLike { get; set; }
         public Forcast()
         {
 
         }
         public Forcast(JToken j)
         {
-            this.Headline = j["Headline"]["Text"].ToString();
+            this.CurrentTemp = j["list"][0]["main"]["temp"].ToString();
+            this.CurrentFeelsLike = j["list"][0]["main"]["feels_like"].ToString();
         }
     }
 }
