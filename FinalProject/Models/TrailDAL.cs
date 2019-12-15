@@ -78,10 +78,35 @@ namespace FinalProject.Models
             Trails myTrail = new Trails(x[0]);
             return myTrail;
         }
-        public static Forcast OpenWeatherGetForcast(string Location)
+        public static List<Forcast> OpenWeatherGetForcast(string Location)
         {
             LatLng l = GetLatLng(Location);
             HttpWebRequest request = WebRequest.CreateHttp($"http://api.openweathermap.org/data/2.5/forecast?lat={l.Lat}&lon={l.Lng}&units=imperial&APPID={Secret.OpenKey}");
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            StreamReader rd = new StreamReader(response.GetResponseStream());
+            string APItext = rd.ReadToEnd();
+            JToken t = JToken.Parse(APItext);
+
+            List<Forcast> fullList = new List<Forcast>();
+            List<JToken> x = t["list"].ToList();
+            foreach(JToken token in x)
+            {
+                Forcast y = new Forcast(token);
+                fullList.Add(y);
+            }
+            List<Forcast> fiveDays = new List<Forcast>();
+            fiveDays.Add(fullList[3]);
+            fiveDays.Add(fullList[11]);
+            fiveDays.Add(fullList[19]);
+            fiveDays.Add(fullList[27]);
+            fiveDays.Add(fullList[35]);
+            return fiveDays;
+            //returns noon reading for each day.
+        }
+        public static Forcast OpenWeatherCurrentForcast(string Location)
+        {
+            LatLng l = GetLatLng(Location);
+            HttpWebRequest request = WebRequest.CreateHttp($"http://api.openweathermap.org/data/2.5/weather?lat={l.Lat}&lon={l.Lng}&units=imperial&APPID={Secret.OpenKey}");
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             StreamReader rd = new StreamReader(response.GetResponseStream());
             string APItext = rd.ReadToEnd();

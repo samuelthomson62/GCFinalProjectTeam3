@@ -1,9 +1,6 @@
 @model FinalProject.Models.Trails
 
-@{
-    ViewData["Title"] = "TrailsDetail";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+
 <html>
 <head>
     <style>
@@ -88,7 +85,10 @@
 
         </dl>
     </div>
-    <p>Weather: @ViewBag.Forcast.CurrentTemp</p>
+    @foreach(var item in ViewBag.Forcast)
+    {
+        <p>@item.Description</p>
+    }
     <div>
         <button id="myBtn">Add To Bucket</button>
 

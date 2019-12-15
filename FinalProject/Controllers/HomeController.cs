@@ -35,7 +35,7 @@ namespace FinalProject.Controllers
         {
             //We have to call the API again to get the trail we want to save.
             Trails x = TrailDAL.GetTrailById(Id);
-            Forcast f = TrailDAL.OpenWeatherGetForcast(x.Location);
+            List<Forcast> f = TrailDAL.OpenWeatherGetForcast(x.Location);
             ViewBag.Forcast = f;
             return View(x);
         }
