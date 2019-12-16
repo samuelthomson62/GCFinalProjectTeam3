@@ -37,6 +37,7 @@ namespace FinalProject.Controllers
             Trails x = TrailDAL.GetTrailById(Id);
             List<Forcast> f = TrailDAL.OpenWeatherGetForcast(x.Location);
             ViewBag.Forcast = f;
+            ViewBag.Water = x.Length % 6;
             return View(x);
         }
         public IActionResult AddCheckMark(int? id)

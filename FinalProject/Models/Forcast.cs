@@ -8,7 +8,7 @@ namespace FinalProject.Models
 {
     public class Forcast
     {
-        public string Temp { get; set; }
+        public decimal Temp { get; set; }
         public string FeelsLike { get; set; }
         public string Humidity { get; set; }
         public string Description { get; set; }
@@ -22,7 +22,7 @@ namespace FinalProject.Models
         }
         public Forcast(JToken j)
         {
-            this.Temp = j["main"]["temp"].ToString();
+            this.Temp = decimal.Parse(j["main"]["temp"].ToString());
             this.FeelsLike = j["main"]["feels_like"].ToString();
             this.Humidity = j["main"]["humidity"].ToString();
             this.Description = j["weather"][0]["description"].ToString();

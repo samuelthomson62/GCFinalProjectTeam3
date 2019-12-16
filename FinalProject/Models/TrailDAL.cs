@@ -95,13 +95,12 @@ namespace FinalProject.Models
                 fullList.Add(y);
             }
             List<Forcast> fiveDays = new List<Forcast>();
-            fiveDays.Add(fullList[3]);
-            fiveDays.Add(fullList[11]);
-            fiveDays.Add(fullList[19]);
-            fiveDays.Add(fullList[27]);
-            fiveDays.Add(fullList[35]);
+            fiveDays.Add(fullList[0]);
+            fiveDays.Add(fullList[7]);
+            fiveDays.Add(fullList[15]);
+            fiveDays.Add(fullList[23]);
+            fiveDays.Add(fullList[31]);
             return fiveDays;
-            //returns noon reading for each day.
         }
         public static Forcast OpenWeatherCurrentForcast(string Location)
         {
