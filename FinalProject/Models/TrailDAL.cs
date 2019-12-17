@@ -10,8 +10,6 @@ namespace FinalProject.Models
 {
     public class TrailDAL
     {
-
-
         public static LatLng GetLatLng(string location)
         {
             //this method uses the MapQuest API to convert a string location like "Grand Rapids, MI" to Latitude and Longitude for the Hiking API
@@ -78,8 +76,42 @@ namespace FinalProject.Models
             //I have to grab the first object of that list to get the Trails model to convert the properties propperly
             List<JToken> x = t["trails"].ToList();
             Trails myTrail = new Trails(x[0]);
-
             return myTrail;
+        }
+        public static List<Forcast> OpenWeatherGetForcast(string Location)
+        {
+            LatLng l = GetLatLng(Location);
+            HttpWebRequest request = WebRequest.CreateHttp($"http://api.openweathermap.org/data/2.5/forecast?lat={l.Lat}&lon={l.Lng}&units=imperial&APPID={Secret.OpenKey}");
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            StreamReader rd = new StreamReader(response.GetResponseStream());
+            string APItext = rd.ReadToEnd();
+            JToken t = JToken.Parse(APItext);
+
+            List<Forcast> fullList = new List<Forcast>();
+            List<JToken> x = t["list"].ToList();
+            foreach(JToken token in x)
+            {
+                Forcast y = new Forcast(token);
+                fullList.Add(y);
+            }
+            List<Forcast> fiveDays = new List<Forcast>();
+            fiveDays.Add(fullList[0]);
+            fiveDays.Add(fullList[7]);
+            fiveDays.Add(fullList[15]);
+            fiveDays.Add(fullList[23]);
+            fiveDays.Add(fullList[31]);
+            return fiveDays;
+        }
+        public static Forcast OpenWeatherCurrentForcast(string Location)
+        {
+            LatLng l = GetLatLng(Location);
+            HttpWebRequest request = WebRequest.CreateHttp($"http://api.openweathermap.org/data/2.5/weather?lat={l.Lat}&lon={l.Lng}&units=imperial&APPID={Secret.OpenKey}");
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            StreamReader rd = new StreamReader(response.GetResponseStream());
+            string APItext = rd.ReadToEnd();
+            JToken t = JToken.Parse(APItext);
+            Forcast f = new Forcast(t);
+            return f;
         }
     }
 }

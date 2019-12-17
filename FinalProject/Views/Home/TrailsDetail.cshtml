@@ -1,9 +1,6 @@
 @model FinalProject.Models.Trails
 
-@{
-    ViewData["Title"] = "TrailsDetail";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+
 <html>
 <head>
     <style>
@@ -75,26 +72,86 @@
             </dd>
 
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Length) 
+                @Html.DisplayNameFor(model => model.Length)
             </dt>
             <dd class="col-sm-10">
                 @Html.DisplayFor(model => model.Length) Miles
             </dd>
-            
-            <dd class="col-sm-2">
 
+            <dd class="col-sm-4">
                 <img src="@Model.ImgSmallMed" alt="Italian Trulli" width="auto" height="200" />
+            </dd>
+            <dd class="col-sm-2">
+                <p>You should bering @ViewBag.Water liters of water per person.</p>
             </dd>
 
         </dl>
     </div>
+
+    <dl class="row">
+        <dt class="col-sm-2">
+            @ViewBag.Forcast[0].DayOfWeek
+        </dt>
+        <dt class="col-sm-2">
+            @ViewBag.Forcast[1].DayOfWeek
+        </dt>
+        <dt class="col-sm-2">
+            @ViewBag.Forcast[2].DayOfWeek
+        </dt>
+        <dt class="col-sm-2">
+            @ViewBag.Forcast[3].DayOfWeek
+        </dt>
+        <dt class="col-sm-2">
+            @ViewBag.Forcast[4].DayOfWeek
+        </dt>
+        <dt class="col-sm-2">
+
+        </dt>
+    </dl>
+    <dl class="row">
+        <dd class="col-sm-2">
+            @ViewBag.Forcast[0].Temp&#8457;
+        </dd>
+        <dd class="col-sm-2">
+            @ViewBag.Forcast[1].Temp&#8457;
+        </dd>
+        <dd class="col-sm-2">
+            @ViewBag.Forcast[2].Temp&#8457;
+        </dd>
+        <dd class="col-sm-2">
+            @ViewBag.Forcast[3].Temp&#8457;
+        </dd>
+        <dd class="col-sm-2">
+            @ViewBag.Forcast[4].Temp&#8457;
+        </dd>
+        <dd class="col-sm-2">
+        </dd>
+    </dl>
+    <dl class="row">
+        <dd class="col-sm-2">
+            @ViewBag.Forcast[0].Description
+        </dd>
+        <dd class="col-sm-2">
+            @ViewBag.Forcast[1].Description
+        </dd>
+        <dd class="col-sm-2">
+            @ViewBag.Forcast[2].Description
+        </dd>
+        <dd class="col-sm-2">
+            @ViewBag.Forcast[3].Description
+        </dd>
+        <dd class="col-sm-2">
+            @ViewBag.Forcast[4].Description
+        </dd>
+        <dd class="col-sm-2">
+        </dd>
+    </dl>
     <div>
         <button id="myBtn">Add To Bucket</button>
 
-        @*@Html.ActionLink("Adding", "AddToBucketList", new { Name = @Model.Name, Location = Model.Location, Summary = Model.Summary, Image = Model.ImgSmallMed, Length = Model.Length });*@
         <button asp-action="Search">Back to List</button>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- Trigger/Open The Modal -->
+        <!-- Trigger/Open The Modal -->`
         <!-- The Modal -->
 
         <form method="post" asp-action="AddToBucketList">
@@ -112,20 +169,20 @@
                     @Html.Hidden("summary", @Model.Summary)
                     @Html.Hidden("image", @Model.ImgSmallMed)
                     @Html.Hidden("length", @Model.Length)
- 
+
                     <button>
 
                         Add To Bucket List
                         @*@Html.ActionLink("Add to Bucket List", "AddToBucketList",
-                            new
-                      {
-                          name = @Model.Name,
-                          location = @Model.Location,
-                          summary = @Model.Summary,
-                          image = @Model.ImgSmallMed,
-                          length = @Model.Length
-                  }*@
-              )
+                                      new
+                                {
+                                    name = @Model.Name,
+                                    location = @Model.Location,
+                                    summary = @Model.Summary,
+                                    image = @Model.ImgSmallMed,
+                                    length = @Model.Length
+                            }*@
+                        )
                     </button>
                     <button class="btn btn-default" data-dismiss="modal" id="btnCancel"> Cancel</button>
                 </div>
@@ -155,6 +212,5 @@
                 }
             }
         </script>
-
 </body>
 </html>
