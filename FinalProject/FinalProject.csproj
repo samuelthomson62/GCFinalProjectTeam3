@@ -6,7 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Views\Home\Recomendations.cshtml" />
+    <Compile Remove="Views\BucketList\**" />
+    <Content Remove="Views\BucketList\**" />
+    <EmbeddedResource Remove="Views\BucketList\**" />
+    <None Remove="Views\BucketList\**" />
   </ItemGroup>
 
 
@@ -23,16 +26,6 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <Folder Include="Areas\Admin\Controllers\" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <None Include="Views\Home\Recomendations.cshtml" />
   </ItemGroup>
 
 </Project>

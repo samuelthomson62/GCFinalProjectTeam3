@@ -28,32 +28,33 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Location)
-            </td>
-            <td>
-                @*<form action="AddToBucketList">
-                <input type="text" name="id" value=" @Html.DisplayFor(modelItem => item.Id)" />
-                <input type="hidden" name="name" value=" @Html.DisplayFor(modelItem => item.Name)" />
-                <input type="hidden" name="location" value=" @Html.DisplayFor(modelItem => item.Location)" />
-                <input type="submit" value="Save" />
-            </form>*@
-                <div>
-                    @*<a asp-action="AddToBucketList" asp-route-id="@item.Name">Add To BucketList</a>*@
-                    <a asp-action="TrailsDetail" asp-route-id="@item.Id">Details</a> |
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Location)
+                </td>
+                <td>
+                    @*<form action="AddToBucketList">
+                            <input type="text" name="id" value=" @Html.DisplayFor(modelItem => item.Id)" />
+                            <input type="hidden" name="name" value=" @Html.DisplayFor(modelItem => item.Name)" />
+                            <input type="hidden" name="location" value=" @Html.DisplayFor(modelItem => item.Location)" />
+                            <input type="submit" value="Save" />
+                        </form>*@
+                    <div>
+                        @*<a asp-action="AddToBucketList" asp-route-id="@item.Name">Add To BucketList</a>*@
+                        <a asp-action="TrailsDetail" asp-route-id="@item.Id">Details</a> |
 
-                </div>
 
-            </td>
-        </tr>
+                    </div>
+
+                </td>
+            </tr>
         }
     </tbody>
 </table>

@@ -29,17 +29,20 @@
             </div>
             <div class="form-group">
                 <label asp-for="Input.TimesDoneBefore"></label>
-                <input asp-for="Input.TimesDoneBefore" class="form-control" />
+                <input asp-for="Input.TimesDoneBefore" class="form-control" type="number" />
                 <span asp-validation-for="Input.TimesDoneBefore" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Input.BodyBuild"></label>
-                <input asp-for="Input.BodyBuild" class="form-control" />
+                <input asp-for="Input.BodyBuild" class="form-control" type="radio" value="athletic" />Athletic
+                <input asp-for="Input.BodyBuild" class="form-control" type="radio" value="average" />Average
+                <input asp-for="Input.BodyBuild" class="form-control" type="radio" value="unathletic" />Unathletic
                 <span asp-validation-for="Input.BodyBuild" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Input.PreExistingCondition"></label>
-                <input asp-for="Input.PreExistingCondition" class="form-control" />
+                <input asp-for="Input.PreExistingCondition" class="form-control" type="radio" value="y" />Yes
+                <input asp-for="Input.PreExistingCondition" class="form-control" type="radio" value="n" />No
                 <span asp-validation-for="Input.PreExistingCondition" class="text-danger"></span>
             </div>
             <div class="form-group">
