@@ -31,6 +31,10 @@ namespace FinalProject.Controllers
             return View(trail);
         }
 
+        public IActionResult Essentials()
+        {
+            return View();
+        }
         public IActionResult TrailsDetail(int Id)
         {
             //We have to call the API again to get the trail we want to save.
