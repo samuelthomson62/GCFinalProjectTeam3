@@ -78,20 +78,34 @@ namespace FinalProject.Models
             Trails myTrail = new Trails(x[0]);
             return myTrail;
         }
-        public static int AccuweatherGetLocationKey(LatLng l)
+        public static List<Forcast> OpenWeatherGetForcast(string Location)
         {
-            HttpWebRequest request = WebRequest.CreateHttp($"http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey={Secret.AccuKey}&q={l.Lat},{l.Lng}");
+            LatLng l = GetLatLng(Location);
+            HttpWebRequest request = WebRequest.CreateHttp($"http://api.openweathermap.org/data/2.5/forecast?lat={l.Lat}&lon={l.Lng}&units=imperial&APPID={Secret.OpenKey}");
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             StreamReader rd = new StreamReader(response.GetResponseStream());
             string APItext = rd.ReadToEnd();
             JToken t = JToken.Parse(APItext);
-            return int.Parse(t["Key"].ToString());
+
+            List<Forcast> fullList = new List<Forcast>();
+            List<JToken> x = t["list"].ToList();
+            foreach(JToken token in x)
+            {
+                Forcast y = new Forcast(token);
+                fullList.Add(y);
+            }
+            List<Forcast> fiveDays = new List<Forcast>();
+            fiveDays.Add(fullList[0]);
+            fiveDays.Add(fullList[7]);
+            fiveDays.Add(fullList[15]);
+            fiveDays.Add(fullList[23]);
+            fiveDays.Add(fullList[31]);
+            return fiveDays;
         }
-        public static Forcast AccuweatherGetForcast(string Location)
+        public static Forcast OpenWeatherCurrentForcast(string Location)
         {
             LatLng l = GetLatLng(Location);
-            int locationKey = AccuweatherGetLocationKey(l);
-            HttpWebRequest request = WebRequest.CreateHttp($"http://dataservice.accuweather.com/forecasts/v1/daily/5day/{locationKey}?apikey={Secret.AccuKey}");
+            HttpWebRequest request = WebRequest.CreateHttp($"http://api.openweathermap.org/data/2.5/weather?lat={l.Lat}&lon={l.Lng}&units=imperial&APPID={Secret.OpenKey}");
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             StreamReader rd = new StreamReader(response.GetResponseStream());
             string APItext = rd.ReadToEnd();
