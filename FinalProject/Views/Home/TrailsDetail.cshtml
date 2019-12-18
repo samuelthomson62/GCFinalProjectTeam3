@@ -27,7 +27,7 @@
             margin: auto;
             padding: 20px;
             border: 1px solid #888;
-            width: 80%;
+            width: 20%;
         }
         /* The Close Button */
         .close {
@@ -91,7 +91,7 @@
 
         </dl>
     </div>
-    <div class="alert alert-info" role="alert">
+    <div class="alert alert-warning" role="alert">
         <dl class="row">
             <dt class="col-sm-2">
                 @ViewBag.Forcast[0].DayOfWeek
@@ -150,7 +150,7 @@
             <dd class="col-sm-2">
             </dd>
         </dl>
-        </div>
+    </div>
         <div>
             <button id="myBtn">Add To Bucket</button>
 
@@ -159,7 +159,7 @@
             <!-- Trigger/Open The Modal -->`
             <!-- The Modal -->
 
-            <form method="post" asp-action="AddToBucketList">
+            <form method="post"  asp-action="AddToBucketList">
                 <div id="myModal" class="modal">
                     <div class="col-sm-4">    </div>
                     <!-- Modal content -->
@@ -175,7 +175,7 @@
                         @Html.Hidden("image", @Model.ImgSmallMed)
                         @Html.Hidden("length", @Model.Length)
 
-                        <button>
+                        <button class="btn btn-success">
 
                             Add To Bucket List
                             @*@Html.ActionLink("Add to Bucket List", "AddToBucketList",
@@ -187,9 +187,9 @@
                                         image = @Model.ImgSmallMed,
                                         length = @Model.Length
                                 }*@
-                            )
+                            
                         </button>
-                        <button class="btn btn-default" data-dismiss="modal" id="btnCancel"> Cancel</button>
+                        @*<button class="btn btn-default" data-dismiss="span" id="btnCancel"> Cancel</button>*@
                     </div>
                 </div>
             </form>
@@ -202,12 +202,17 @@
                 var btn = document.getElementById("myBtn");
                 // Get the <span> element that closes the modal
                 var span = document.getElementsByClassName("close")[0];
+                 var btnCancel = document.getElementsByClassName("close")[0];
+
                 // When the user clicks the button, open the modal
                 btn.onclick = function () {
                     modal.style.display = "block";
                 }
                 // When the user clicks on <span> (x), close the modal
                 span.onclick = function () {
+                    modal.style.display = "none";
+                }
+                     span.onclick = function () {
                     modal.style.display = "none";
                 }
                 // When the user clicks anywhere outside of the modal, close it
