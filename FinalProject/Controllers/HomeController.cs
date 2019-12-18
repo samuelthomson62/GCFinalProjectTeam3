@@ -2,14 +2,13 @@ using FinalProject.Data;
 using FinalProject.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using System;
 
 
 namespace FinalProject.Controllers
@@ -45,7 +44,7 @@ namespace FinalProject.Controllers
             return View(x);
         }
         public IActionResult AddCheckMark(int? id)
-            {
+        {
             var completeMark = "https://solidwize.com/wp-content/uploads/2012/04/Green-Check-Mark.jpg";
             var checkmark =
                 from n in _db.Trails
@@ -53,7 +52,7 @@ namespace FinalProject.Controllers
                 select n;
             foreach (Trails bl in checkmark)
             {
-                if (completeMark== bl.CompleteMark)
+                if (completeMark == bl.CompleteMark)
                 {
                     return RedirectToAction(nameof(AlreadyMarkedCompleted));
                 }
@@ -81,15 +80,15 @@ namespace FinalProject.Controllers
                 }
             }
             try
-            { 
-                _db.SaveChanges(); 
+            {
+                _db.SaveChanges();
             }
             catch (Exception e)
-            { 
+            {
                 Console.WriteLine(e);
-            }    
-         _db.SaveChanges();
-         return  RedirectToAction(nameof(BucketList));
+            }
+            _db.SaveChanges();
+            return RedirectToAction(nameof(BucketList));
         }
         public IActionResult AlreadyMarkedCompleted()
         {
@@ -103,7 +102,7 @@ namespace FinalProject.Controllers
                             select n;
             foreach (Trails bl in checkmark)
             {
-                if (incompleteMark==bl.CompleteMark)
+                if (incompleteMark == bl.CompleteMark)
                 {
                     return RedirectToAction(nameof(BucketList));
                 }
@@ -143,13 +142,13 @@ namespace FinalProject.Controllers
 
         [Authorize]
         [HttpPost]
-        public IActionResult AddToBucketList( string name, string location, string summary, string image, decimal length, string date)
+        public IActionResult AddToBucketList(string name, string location, string summary, string image, decimal length, string date)
         {
             if (User.Identity.IsAuthenticated)
             {
                 string status = "https://www.trzcacak.rs/myfile/detail/51-515377_x-mark-transparent-background-png-x.png";
                 string id = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                var input = new Trails { UserId = id, Location = location, Name = name, Summary = summary, ImgSmallMed = image, Length = length, Date=date, CompleteMark=status};
+                var input = new Trails { UserId = id, Location = location, Name = name, Summary = summary, ImgSmallMed = image, Length = length, Date = date, CompleteMark = status };
 
                 _db.Add(input);
                 _db.SaveChanges();
@@ -223,11 +222,11 @@ namespace FinalProject.Controllers
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(BucketList));
         }
-        public IActionResult BucketListDateModal()  
+        public IActionResult BucketListDateModal()
         {
             return View();
         }
-       public IActionResult Privacy()
+        public IActionResult Privacy()
         {
             return View();
         }
@@ -461,6 +460,10 @@ namespace FinalProject.Controllers
                 }
             }
             return difficulty;
+        }
+        public IActionResult Contact()
+        {
+            return View();
         }
     }
 }
