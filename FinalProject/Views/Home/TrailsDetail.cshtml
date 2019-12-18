@@ -77,140 +77,145 @@
             <dd class="col-sm-10">
                 @Html.DisplayFor(model => model.Length) Miles
             </dd>
+            <dt class="col-sm-2">
+                <h3> Water </h3>
+            </dt>
+            <dd class="col-sm-2">
+                <p>You should Bring @ViewBag.Water liters of water per person.</p>
+            </dd>
 
             <dd class="col-sm-4">
                 <img src="@Model.ImgSmallMed" alt="Italian Trulli" width="auto" height="200" />
             </dd>
-            <dd class="col-sm-2">
-                <p>You should bering @ViewBag.Water liters of water per person.</p>
-            </dd>
+
 
         </dl>
     </div>
+    <div class="alert alert-info" role="alert">
+        <dl class="row">
+            <dt class="col-sm-2">
+                @ViewBag.Forcast[0].DayOfWeek
+            </dt>
+            <dt class="col-sm-2">
+                @ViewBag.Forcast[1].DayOfWeek
+            </dt>
+            <dt class="col-sm-2">
+                @ViewBag.Forcast[2].DayOfWeek
+            </dt>
+            <dt class="col-sm-2">
+                @ViewBag.Forcast[3].DayOfWeek
+            </dt>
+            <dt class="col-sm-2">
+                @ViewBag.Forcast[4].DayOfWeek
+            </dt>
+            <dt class="col-sm-2">
 
-    <dl class="row">
-        <dt class="col-sm-2">
-            @ViewBag.Forcast[0].DayOfWeek
-        </dt>
-        <dt class="col-sm-2">
-            @ViewBag.Forcast[1].DayOfWeek
-        </dt>
-        <dt class="col-sm-2">
-            @ViewBag.Forcast[2].DayOfWeek
-        </dt>
-        <dt class="col-sm-2">
-            @ViewBag.Forcast[3].DayOfWeek
-        </dt>
-        <dt class="col-sm-2">
-            @ViewBag.Forcast[4].DayOfWeek
-        </dt>
-        <dt class="col-sm-2">
+            </dt>
+        </dl>
+        <dl class="row">
+            <dd class="col-sm-2">
+                @ViewBag.Forcast[0].Temp&#8457;
+            </dd>
+            <dd class="col-sm-2">
+                @ViewBag.Forcast[1].Temp&#8457;
+            </dd>
+            <dd class="col-sm-2">
+                @ViewBag.Forcast[2].Temp&#8457;
+            </dd>
+            <dd class="col-sm-2">
+                @ViewBag.Forcast[3].Temp&#8457;
+            </dd>
+            <dd class="col-sm-2">
+                @ViewBag.Forcast[4].Temp&#8457;
+            </dd>
+            <dd class="col-sm-2">
+            </dd>
+        </dl>
+        <dl class="row">
+            <dd class="col-sm-2">
+                @ViewBag.Forcast[0].Description
+            </dd>
+            <dd class="col-sm-2">
+                @ViewBag.Forcast[1].Description
+            </dd>
+            <dd class="col-sm-2">
+                @ViewBag.Forcast[2].Description
+            </dd>
+            <dd class="col-sm-2">
+                @ViewBag.Forcast[3].Description
+            </dd>
+            <dd class="col-sm-2">
+                @ViewBag.Forcast[4].Description
+            </dd>
+            <dd class="col-sm-2">
+            </dd>
+        </dl>
+        </div>
+        <div>
+            <button id="myBtn">Add To Bucket</button>
 
-        </dt>
-    </dl>
-    <dl class="row">
-        <dd class="col-sm-2">
-            @ViewBag.Forcast[0].Temp&#8457;
-        </dd>
-        <dd class="col-sm-2">
-            @ViewBag.Forcast[1].Temp&#8457;
-        </dd>
-        <dd class="col-sm-2">
-            @ViewBag.Forcast[2].Temp&#8457;
-        </dd>
-        <dd class="col-sm-2">
-            @ViewBag.Forcast[3].Temp&#8457;
-        </dd>
-        <dd class="col-sm-2">
-            @ViewBag.Forcast[4].Temp&#8457;
-        </dd>
-        <dd class="col-sm-2">
-        </dd>
-    </dl>
-    <dl class="row">
-        <dd class="col-sm-2">
-            @ViewBag.Forcast[0].Description
-        </dd>
-        <dd class="col-sm-2">
-            @ViewBag.Forcast[1].Description
-        </dd>
-        <dd class="col-sm-2">
-            @ViewBag.Forcast[2].Description
-        </dd>
-        <dd class="col-sm-2">
-            @ViewBag.Forcast[3].Description
-        </dd>
-        <dd class="col-sm-2">
-            @ViewBag.Forcast[4].Description
-        </dd>
-        <dd class="col-sm-2">
-        </dd>
-    </dl>
-    <div>
-        <button id="myBtn">Add To Bucket</button>
+            <button asp-action="Search">Back to List</button>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <!-- Trigger/Open The Modal -->`
+            <!-- The Modal -->
 
-        <button asp-action="Search">Back to List</button>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- Trigger/Open The Modal -->`
-        <!-- The Modal -->
+            <form method="post" asp-action="AddToBucketList">
+                <div id="myModal" class="modal">
+                    <div class="col-sm-4">    </div>
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <div class="form-group">
+                            <input type="date" placeholder="enter Date" class="form-control" id="text" name="date" />
+                        </div>
 
-        <form method="post" asp-action="AddToBucketList">
-            <div id="myModal" class="modal">
-                <div class="col-sm-4">    </div>
-                <!-- Modal content -->
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <div class="form-group">
-                        <input type="date" placeholder="enter Date" class="form-control" id="text" name="date" />
+                        @Html.Hidden("name", @Model.Name)
+                        @Html.Hidden("location", @Model.Location)
+                        @Html.Hidden("summary", @Model.Summary)
+                        @Html.Hidden("image", @Model.ImgSmallMed)
+                        @Html.Hidden("length", @Model.Length)
+
+                        <button>
+
+                            Add To Bucket List
+                            @*@Html.ActionLink("Add to Bucket List", "AddToBucketList",
+                                          new
+                                    {
+                                        name = @Model.Name,
+                                        location = @Model.Location,
+                                        summary = @Model.Summary,
+                                        image = @Model.ImgSmallMed,
+                                        length = @Model.Length
+                                }*@
+                            )
+                        </button>
+                        <button class="btn btn-default" data-dismiss="modal" id="btnCancel"> Cancel</button>
                     </div>
-
-                    @Html.Hidden("name", @Model.Name)
-                    @Html.Hidden("location", @Model.Location)
-                    @Html.Hidden("summary", @Model.Summary)
-                    @Html.Hidden("image", @Model.ImgSmallMed)
-                    @Html.Hidden("length", @Model.Length)
-
-                    <button>
-
-                        Add To Bucket List
-                        @*@Html.ActionLink("Add to Bucket List", "AddToBucketList",
-                                      new
-                                {
-                                    name = @Model.Name,
-                                    location = @Model.Location,
-                                    summary = @Model.Summary,
-                                    image = @Model.ImgSmallMed,
-                                    length = @Model.Length
-                            }*@
-                        )
-                    </button>
-                    <button class="btn btn-default" data-dismiss="modal" id="btnCancel"> Cancel</button>
                 </div>
-            </div>
-        </form>
+            </form>
 
 
-        <script>
-            // Get the modal
-            var modal = document.getElementById("myModal");
-            // Get the button that opens the modal
-            var btn = document.getElementById("myBtn");
-            // Get the <span> element that closes the modal
-            var span = document.getElementsByClassName("close")[0];
-            // When the user clicks the button, open the modal
-            btn.onclick = function () {
-                modal.style.display = "block";
-            }
-            // When the user clicks on <span> (x), close the modal
-            span.onclick = function () {
-                modal.style.display = "none";
-            }
-            // When the user clicks anywhere outside of the modal, close it
-            window.onclick = function (event) {
-                if (event.target == modal) {
+            <script>
+                // Get the modal
+                var modal = document.getElementById("myModal");
+                // Get the button that opens the modal
+                var btn = document.getElementById("myBtn");
+                // Get the <span> element that closes the modal
+                var span = document.getElementsByClassName("close")[0];
+                // When the user clicks the button, open the modal
+                btn.onclick = function () {
+                    modal.style.display = "block";
+                }
+                // When the user clicks on <span> (x), close the modal
+                span.onclick = function () {
                     modal.style.display = "none";
                 }
-            }
-        </script>
+                // When the user clicks anywhere outside of the modal, close it
+                window.onclick = function (event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                }
+            </script>
 </body>
 </html>
