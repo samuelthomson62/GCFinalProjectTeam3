@@ -22,6 +22,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Location)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Level)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -39,17 +42,14 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Location)
                 </td>
-                <td>
-                    @*<form action="AddToBucketList">
-                            <input type="text" name="id" value=" @Html.DisplayFor(modelItem => item.Id)" />
-                            <input type="hidden" name="name" value=" @Html.DisplayFor(modelItem => item.Name)" />
-                            <input type="hidden" name="location" value=" @Html.DisplayFor(modelItem => item.Location)" />
-                            <input type="submit" value="Save" />
-                        </form>*@
-                    <div>
-                        @*<a asp-action="AddToBucketList" asp-route-id="@item.Name">Add To BucketList</a>*@
-                        <a asp-action="TrailsDetail" asp-route-id="@item.Id">Details</a> |
 
+                <th>
+                    @Html.DisplayFor(modelItem => item.Level)
+                </th>
+                <td>
+
+                    <div>
+                        <button class="btn btn-warning"> <a asp-controller="Home" asp-action="TrailsDetail" asp-route-id="@item.Id">Details</a> </button>
 
                     </div>
 
