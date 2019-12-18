@@ -2,18 +2,21 @@
 @{
     ViewData["Title"] = "Home Page";
 }
+<body>
+    <h1>We-Venture</h1>
     <form method="get" asp-action="GeneralSearch">
-
-
         <div class="search">
-
-            <input type="text" name="state" placeholder="Search for Trails" required />
+            <input type="text" name="state" placeholder="Search by location" required />
+            </br>
             <input type="submit"/>
         </div>
-     
-       </form>
-<style>
+    </form>
 
+</body>
+<style>
+    body {
+        text-align: center;
+    }
     .search {
         padding-top: 64px;
     }

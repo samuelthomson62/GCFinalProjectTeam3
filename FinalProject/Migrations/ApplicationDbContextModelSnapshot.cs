@@ -26,9 +26,6 @@ namespace FinalProject.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CompleteMark")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Date")
                         .HasColumnType("nvarchar(max)");
 

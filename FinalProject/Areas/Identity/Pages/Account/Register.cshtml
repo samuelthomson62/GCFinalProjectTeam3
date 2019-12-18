@@ -3,13 +3,70 @@
 @{
     ViewData["Title"] = "Register";
 }
+<style>
+    /* The container */
+    .container {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 22px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    /* Create a custom radio button */
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        background-color: #eee;
+        border-radius: 50%;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .container:hover input ~ .checkmark {
+        background-color: #ccc;
+    }
+
+    /* When the radio button is checked, add a blue background */
+    .container input:checked ~ .checkmark {
+        background-color: #2196F3;
+    }
+
+    /* Create the indicator (the dot/circle - hidden when not checked) */
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the indicator (dot/circle) when checked */
+    .container input:checked ~ .checkmark:after {
+        display: block;
+    }
+
+    /* Style the indicator (dot/circle) */
+    .container .checkmark:after {
+        top: 9px;
+        left: 9px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: white;
+    }
+</style>
 
 <h1>@ViewData["Title"]</h1>
 
-<div class="row">
-    <div class="col-md-4">
-        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h4>Create a new account.</h4>
+<form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+    <h4>Create a new account.</h4>
+    <div class="row">
+        <div class="col-md-6">
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
@@ -28,24 +85,6 @@
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Input.TimesDoneBefore"></label>
-                <input asp-for="Input.TimesDoneBefore" class="form-control" type="number" />
-                <span asp-validation-for="Input.TimesDoneBefore" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.BodyBuild"></label>
-                <input asp-for="Input.BodyBuild" class="form-control" type="radio" value="athletic" />Athletic
-                <input asp-for="Input.BodyBuild" class="form-control" type="radio" value="average" />Average
-                <input asp-for="Input.BodyBuild" class="form-control" type="radio" value="unathletic" />Unathletic
-                <span asp-validation-for="Input.BodyBuild" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.PreExistingCondition"></label>
-                <input asp-for="Input.PreExistingCondition" class="form-control" type="radio" value="y" />Yes
-                <input asp-for="Input.PreExistingCondition" class="form-control" type="radio" value="n" />No
-                <span asp-validation-for="Input.PreExistingCondition" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Input.City"></label>
                 <input asp-for="Input.City" class="form-control" />
                 <span asp-validation-for="Input.City" class="text-danger"></span>
@@ -60,40 +99,48 @@
                 <input asp-for="Input.ZipCode" class="form-control" />
                 <span asp-validation-for="Input.ZipCode" class="text-danger"></span>
             </div>
-            <button type="submit" class="btn btn-primary">Register</button>
-        </form>
-    </div>
-    <div class="col-md-6 col-md-offset-2">
-        <section>
-            <h4>Use another service to register.</h4>
+        </div>
+        <div class="col-md-6">
+            <h4></h4>
             <hr />
-            @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
-                    <div>
-                        <p>
-                            There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
-                            for details on setting up this ASP.NET application to support logging in via external services.
-                        </p>
-                    </div>
-                }
-                else
-                {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                        <div>
-                            <p>
-                                @foreach (var provider in Model.ExternalLogins)
-                                {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                }
-                            </p>
-                        </div>
-                    </form>
-                }
-            }
-        </section>
+            <div class="form-group">
+                <label asp-for="Input.TimesDoneBefore">How many times have you been hiking before?</label>
+                <input asp-for="Input.TimesDoneBefore" class="form-control" type="number" />
+                <span asp-validation-for="Input.TimesDoneBefore" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.BodyBuild">What is your athletic ability?</label>
+                <label class="container">
+                    Athletic
+                    <input asp-for="Input.BodyBuild" class="checkmark" type="radio" value="athletic" />
+                    <span></span>
+                </label>
+                <label class="container">
+                    <span>Average</span>
+                    <input asp-for="Input.BodyBuild" class="checkmark" type="radio" value="average" />
+                    <span></span>
+                </label>
+                <label class="container">
+                    <span>Unathletic</span>
+                    <input asp-for="Input.BodyBuild" class="checkmark" type="radio" value="unathletic" />
+                    <span></span>
+                </label>
+                <span asp-validation-for="Input.BodyBuild" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <p>Do you have a pre-existing condition that inhibits your ability to walk?</p>
+                <label asp-for="Input.PreExistingCondition" class="container">
+                    <input asp-for="Input.PreExistingCondition" class="checkmark" type="radio" value="y" />Yes
+                </label>
+                <label asp-for="Input.PreExistingCondition" class="container">
+                    <input asp-for="Input.PreExistingCondition" class="checkmark" type="radio" value="n" />No
+                </label>
+                <span asp-validation-for="Input.PreExistingCondition" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+        </div>
     </div>
-</div>
+</form>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
