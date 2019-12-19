@@ -18,17 +18,12 @@ namespace FinalProject.Models
 {
     public class ApplicationUser : IdentityUser
     {
-
         public int TimesDoneBefore { get; set; }
         public string BodyBuild { get; set; }
-
         public string PreExistingCondition { get; set; }
         public string City { get; set; }
         public string State { get; set; }
         public string ZipCode { get; set; }
-
-
-
         public ApplicationUser()
         {
 
@@ -42,7 +37,5 @@ namespace FinalProject.Models
             this.State = State.ToString();
             this.ZipCode = ZipCode.ToString();
         }
-
-
     }
 }

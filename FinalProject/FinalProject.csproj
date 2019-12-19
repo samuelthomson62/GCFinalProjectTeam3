@@ -6,7 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Views\Home\Recomendations.cshtml" />
+    <Compile Remove="Views\BucketList\**" />
+    <Content Remove="Views\BucketList\**" />
+    <EmbeddedResource Remove="Views\BucketList\**" />
+    <None Remove="Views\BucketList\**" />
   </ItemGroup>
 
 
