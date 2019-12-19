@@ -22,17 +22,18 @@ namespace FinalProject.Models
         public  string Date {get; set;}
         public string CompleteMark { get; set; }
 
-        //public int Ascent { get; set; }
-        //public int Descent { get; set; }
-        //public int High { get; set; }
-        //public int Low { get; set; }
-        //public decimal Longitude { get; set; }
-        //public decimal Latitude { get; set; }
-        //public string ConditionStatus { get; set; }
-        //public string ConditionDetails { get; set; }
+        public int Ascent { get; set; }
+        public int Descent { get; set; }
+        public int High { get; set; }
+        public int Low { get; set; }
+        public decimal Longitude { get; set; }
+        public decimal Latitude { get; set; }
+        public string ConditionStatus { get; set; }
+        public string ConditionDetails { get; set; }
         //public Datetime ConditionDate { get; set; }
         public virtual ApplicationUser User { get; set; }
         public string UserId { get; set; }
+        public string Level { get; set; }
 
 
         public Trails()
@@ -47,6 +48,7 @@ namespace FinalProject.Models
             this.Name = t["name"].ToString();
             this.Summary = t["summary"].ToString();
             this.Difficulty = t["difficulty"].ToString();
+           
             //this.Stars = double.Parse(t["stars"].ToString());
             //this.StarVotes = double.Parse(t["starVotes"].ToString());
             this.Location = t["location"].ToString();
@@ -55,16 +57,39 @@ namespace FinalProject.Models
             //this.ImgSmall = t["imgSmall"].ToString();
             // this.ImgMedium = t["imgMedium"].ToString();
             this.Length = decimal.Parse(t["length"].ToString());
-            //this.Ascent = int.Parse(t["ascent"].ToString());
-            //this.Descent = int.Parse(t["descent"].ToString());
-            //this.High = int.Parse(t["high"].ToString());
-            //this.Low = int.Parse(t["low"].ToString());
-            //this.Longitude = decimal.Parse(t["longitude"].ToString());
-            //this.Latitude = decimal.Parse(t["latitude"].ToString());
-            //this.ConditionStatus = t["conditionStatus"].ToString();
-            //this.ConditionDetails = t["conditionDetails"].ToString();
-           
-
+            this.Ascent = int.Parse(t["ascent"].ToString());
+            this.Descent = int.Parse(t["descent"].ToString());
+            this.High = int.Parse(t["high"].ToString());
+            this.Low = int.Parse(t["low"].ToString());
+            this.Longitude = decimal.Parse(t["longitude"].ToString());
+            this.Latitude = decimal.Parse(t["latitude"].ToString());
+            this.ConditionStatus = t["conditionStatus"].ToString();
+            this.ConditionDetails = t["conditionDetails"].ToString();
+            this.Level = t["difficulty"].ToString();
+            if(Level=="green")
+            {
+                Level = "Easy";
+            }
+            if (Level == "greenBlue")
+            {
+                Level = "Easy/Intermediate";
+            }
+            if (Level == "blue")
+            {
+                Level = "Intermediate";
+            }
+            if (Level == "blueBlack")
+            {
+                Level = "Intermediate/Difficult ";
+            }
+            if (Level == "black")
+            {
+                Level = "Difficult";
+            }
+            if (Level == "dBlcak")
+            {
+                Level = "Extreemly Difficult";
+            }
         }
     }
 }

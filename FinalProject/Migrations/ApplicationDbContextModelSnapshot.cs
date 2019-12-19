@@ -26,23 +26,50 @@ namespace FinalProject.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("Ascent")
+                        .HasColumnType("int");
+
                     b.Property<string>("CompleteMark")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ConditionDetails")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ConditionStatus")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Date")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Descent")
+                        .HasColumnType("int");
+
                     b.Property<string>("Difficulty")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("High")
+                        .HasColumnType("int");
 
                     b.Property<string>("ImgSmallMed")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<decimal>("Latitude")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<decimal>("Length")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<string>("Level")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Location")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Longitude")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Low")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");

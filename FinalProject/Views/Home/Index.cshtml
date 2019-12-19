@@ -2,43 +2,112 @@
 @{
     ViewData["Title"] = "Home Page";
 }
+<body>
+    <div class="bg-image"></div>
     <form method="get" asp-action="GeneralSearch">
 
 
         <div class="search">
 
-            <input type="text" name="state" placeholder="Search for Trails" required />
-            <input type="submit"/>
+            <input type="text" name="state" class="searchTerm" placeholder="Search for Trails" required />
+            <input class="searchButton" type="submit" />
         </div>
-     
-       </form>
+
+    </form>
+</body>
 <style>
+
+
+    body, html {
+        height: 100%;
+        margin: 0;
+        background: url("Images/Empire2.JPG") no-repeat fixed center;
+        background-size: cover;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    .bg-image {
+        /* The image used */
+        /* Add the blur effect */
+        filter: blur(8px);
+        -webkit-filter: blur(8px);
+        /* Full height */
+        height: 100%;
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .search {
+        width: 100%;
+        position: relative;
+        display: flex;
+    }
+
+    .searchTerm {
+        width: 100%;
+        border: 3px solid #00B4CC;
+        border-right: none;
+        padding: 5px;
+        height: 50px;
+        border-radius: 5px 0 0 5px;
+        outline: none;
+        color: #9DBFAF;
+    }
+
+        .searchTerm:focus {
+            color: #00B4CC;
+        }
+
+    .searchButton {
+        width: 80px;
+        height: 50px;
+        border: 1px solid #00B4CC;
+        background: #00B4CC;
+        text-align: center;
+        color: #fff;
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+        font-size: 20px;
+    }
+
+    /*Resize the wrap to see the search bar change!*/
+    .search {
+        width: 30%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .s {
+        align-content: center;
+    }
 
     .search {
         padding-top: 64px;
+        align-items: center;
     }
-    
+
     &__title {
         font-size: 22px;
         font-weight: 900;
         text-align: center;
         color: #ff8b88;
     }
-    
+
     &__input {
         width: 100%;
         padding: 12px 24px;
-
         background-color: transparent;
         transition: transform 250ms ease-in-out;
         font-size: 14px;
         line-height: 18px;
-        
-    
         background-color: transparent;
-
- 
-      
         background-repeat: no-repeat;
         background-size: 18px 18px;
         background-position: 95% center;
@@ -47,25 +116,22 @@
         transition: all 250ms ease-in-out;
         backface-visibility: hidden;
         transform-style: preserve-3d;
-        
-        &::placeholder {
-            color: color(#575756 a(0.8));
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-        }
-        
-        &:hover,
-        &:focus {
-            padding: 12px 0;
-            outline: 0;
-            border: 1px solid transparent;
-            border-bottom: 1px solid #575756;
-            border-radius: 0;
-            background-position: 100% center;
-        }
-    
+        &::placeholder
 
+    {
+        color: color(#575756 a(0.8));
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+    }
 
-
-    
+    &:hover,
+    &:focus {
+        padding: 12px 0;
+        outline: 0;
+        border: 1px solid transparent;
+        border-bottom: 1px solid #575756;
+        border-radius: 0;
+        background-position: 100% center;
+    }
 </style>
+
