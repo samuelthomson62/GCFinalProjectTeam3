@@ -1,4 +1,4 @@
-﻿@model IEnumerable<FinalProject.Models.Trails>
+@model IEnumerable<FinalProject.Models.Trails>
 
 @{
     ViewData["Title"] = "Search";
@@ -31,7 +31,6 @@
     <tbody>
         @foreach (var item in Model)
         {
-<<<<<<< HEAD:FinalProject/Views/UserLevel/Search.cshtml
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Id)
@@ -56,32 +55,6 @@
 
             </td>
         </tr>
-=======
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Location)
-                </td>
-
-                <th>
-                    @Html.DisplayFor(modelItem => item.Level)
-                </th>
-                <td>
-
-                    <div>
-                        <button class="btn btn-warning"> <a asp-controller="Home" asp-action="TrailsDetail" asp-route-id="@item.Id">Details</a> </button>
-
-                    </div>
-
-                </td>
-            </tr>
->>>>>>> 755846fe4f7549e3de8de5228d4fe2e5a13e00d2:FinalProject/Views/Home/Search.cshtml
         }
     </tbody>
 </table>

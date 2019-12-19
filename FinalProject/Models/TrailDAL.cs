@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -89,11 +89,7 @@ namespace FinalProject.Models
 
             List<Forcast> fullList = new List<Forcast>();
             List<JToken> x = t["list"].ToList();
-<<<<<<< HEAD
             foreach (JToken token in x)
-=======
-            foreach(JToken token in x)
->>>>>>> 755846fe4f7549e3de8de5228d4fe2e5a13e00d2
             {
                 Forcast y = new Forcast(token);
                 fullList.Add(y);

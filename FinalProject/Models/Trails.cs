@@ -19,7 +19,7 @@ namespace FinalProject.Models
 
         public decimal Length { get; set; }
 
-        public string Date { get; set; }
+        public  string Date {get; set;}
         public string CompleteMark { get; set; }
 
         public int Ascent { get; set; }
@@ -48,11 +48,7 @@ namespace FinalProject.Models
             this.Name = t["name"].ToString();
             this.Summary = t["summary"].ToString();
             this.Difficulty = t["difficulty"].ToString();
-<<<<<<< HEAD
            
-=======
-
->>>>>>> 755846fe4f7549e3de8de5228d4fe2e5a13e00d2
             //this.Stars = double.Parse(t["stars"].ToString());
             //this.StarVotes = double.Parse(t["starVotes"].ToString());
             this.Location = t["location"].ToString();
@@ -70,11 +66,7 @@ namespace FinalProject.Models
             this.ConditionStatus = t["conditionStatus"].ToString();
             this.ConditionDetails = t["conditionDetails"].ToString();
             this.Level = t["difficulty"].ToString();
-<<<<<<< HEAD
             if(Level=="green")
-=======
-            if (Level == "green")
->>>>>>> 755846fe4f7549e3de8de5228d4fe2e5a13e00d2
             {
                 Level = "Easy";
             }

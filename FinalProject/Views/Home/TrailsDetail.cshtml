@@ -5,21 +5,11 @@
 <head>
     <style>
 
-<<<<<<< HEAD
             * {
         box-sizing: border-box;
     }
         body {
         background: url("~/wwwroot/Images/Empire2.JPG") no-repeat fixed center;        }
-=======
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            background: url("~/wwwroot/Images/Empire2.JPG") no-repeat fixed center;
-        }
->>>>>>> 755846fe4f7549e3de8de5228d4fe2e5a13e00d2
         /* The Modal (background) */
         .modal {
             display: none; /* Hidden by default */
@@ -57,7 +47,6 @@
                 cursor: pointer;
             }
 
-<<<<<<< HEAD
              .leftcolumn {   
     float: left;
     width: 75%;
@@ -78,32 +67,10 @@
 
         .card {
             float:left;
-=======
-        .leftcolumn {
-            float: left;
-            width: 75%;
-        }
-
-        .rightcolumn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            float: right;
-            padding-bottom: 50px;
-            padding-left: 90px;
-            padding-right: 10%;
-            padding-top: 130px;
-            border-radius: 4px;
-        }
-
-        .card {
-            float: left;
->>>>>>> 755846fe4f7549e3de8de5228d4fe2e5a13e00d2
             background-color: white;
             padding: 10px;
             margin-top: 10px;
             position: center;
-<<<<<<< HEAD
             padding-left:10px;
             font-family:'Comic Sans MS';
             font-size:large;
@@ -141,50 +108,6 @@
 }
 
 
-=======
-            padding-left: 10px;
-            font-family: 'Comic Sans MS';
-            font-size: large;
-        }
-
-        #temps {
-            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-            border-collapse: collapse;
-            width: 80%;
-        }
-
-            #temps td, #customers th {
-                border: 1px solid #ddd;
-                padding: 8px;
-            }
-
-            #temps tr:nth-child(even) {
-                background-color: #f2f2f2;
-            }
-
-            #temps tr:hover {
-                background-color: #ddd;
-            }
-
-            #temps th {
-                padding-top: 12px;
-                padding-bottom: 12px;
-                text-align: center;
-                background-color: #4CAF50;
-                color: white;
-            }
-
-        .lolita {
-            /*background-color:aquamarine;*/
-        }
-
-        .details {
-            width: 500px;
-        }
-
-        .rightcolumn .img {
-        }
->>>>>>> 755846fe4f7549e3de8de5228d4fe2e5a13e00d2
     </style>
 </head>
 <body>
@@ -220,56 +143,6 @@
         <h4>
         </h4>
         <hr />
-<<<<<<< HEAD
-
-        <div class="leftcolumn">
-            <table class="details">
-                <tr style="background-color:lightyellow">
-                    <th style="font-size:x-large">   @Html.DisplayNameFor(model => model.Name):   </th>
-                    <td style="font-style:italic">        @Html.DisplayFor(model => model.Name)</td>
-                </tr>
-                <p>  </p>
-                <tr>
-                    <th style="font-size:x-large">   @Html.DisplayNameFor(model => model.Summary):    </th>
-                    <td style="font-style:italic">        @Html.DisplayFor(model => model.Summary)</td>
-                </tr>
-                <p></p>
-                <tr style="background-color:lightyellow">
-                    <th style="font-size:x-large">   @Html.DisplayNameFor(model => model.Location):   </th>
-                    <td style="font-style:italic">        @Html.DisplayFor(model => model.Location)</td>
-                </tr>
-                <p> </p>
-                <tr>
-                    <th style="font-size:x-large">   @Html.DisplayNameFor(model => model.Length):   </th>
-                    <td style="font-style:italic">          @Html.DisplayFor(model => model.Length) Miles</td>
-                </tr>
-                <p>    </p>
-                <tr style="background-color:lightyellow">
-                    <th style="font-size:x-large">   @Html.DisplayNameFor(model => model.Level):   </th>
-                    <td style="font-style:italic">          @Html.DisplayFor(model => model.Level) </td>
-                </tr>
-                <tr>
-                    <th style="font-size:x-large">   Condition Status:   </th>
-                    <td style="font-style:italic">   @Html.DisplayFor(model => model.ConditionStatus) </td>
-                </tr>
-                <tr style="background-color:lightyellow">
-                    <th style="font-size:x-large">   Condition Details:   </th>
-                    <td style="font-style:italic">    @Html.DisplayFor(model => model.ConditionDetails) </td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="rightcolumn">
-            <div class="col-sm-4">
-                <img src="@Model.ImgSmallMed" alt="Italian Trulli" width="auto" height="400" />
-            </div>
-        </div>
-        <div class="card">
-            <p>
-                <img src="~/Images/water.jpg" width="60" height="70" /> You should Bring @ViewBag.Water liters of water per person.
-            </p>
-        </div>
-=======
 
         <div class="leftcolumn">
             <table class="details">
@@ -322,12 +195,6 @@
             <br />
 
         </p>
->>>>>>> 755846fe4f7549e3de8de5228d4fe2e5a13e00d2
-        <p>
-            <br />
-
-        </p>
-<<<<<<< HEAD
         <p>
             <br />
 
@@ -388,63 +255,5 @@
                             }
                         }
                     </script>
-=======
-        <table id="temps">
-            <tr>
-                <th> @ViewBag.Forcast[0].DayOfWeek</th>
-                <th> @ViewBag.Forcast[1].DayOfWeek</th>
-                <th> @ViewBag.Forcast[2].DayOfWeek</th>
-                <th> @ViewBag.Forcast[3].DayOfWeek</th>
-                <th> @ViewBag.Forcast[4].DayOfWeek</th>
-
-            </tr>
-            <tr>
-                <td>  @ViewBag.Forcast[0].Temp&#8457;e</td>
-                <td>  @ViewBag.Forcast[1].Temp&#8457;</td>
-                <td>  @ViewBag.Forcast[2].Temp&#8457;</td>
-                <td>  @ViewBag.Forcast[3].Temp&#8457;</td>
-                <td>  @ViewBag.Forcast[4].Temp&#8457;</td>
-            </tr>
-            <tr>
-                <td>   @ViewBag.Forcast[0].Description</td>
-                <td>   @ViewBag.Forcast[1].Description</td>
-                <td>   @ViewBag.Forcast[2].Description</td>
-                <td>   @ViewBag.Forcast[3].Description</td>
-                <td>   @ViewBag.Forcast[4].Description</td>
-            </tr>
-
-        </table>
-
-
-
-    </div>
-    <script>
-        // Get the modal
-        var modal = document.getElementById("myModal");
-        // Get the button that opens the modal
-        var btn = document.getElementById("myBtn");
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
-        var btnCancel = document.getElementsByClassName("close")[0];
-
-        // When the user clicks the button, open the modal
-        btn.onclick = function () {
-            modal.style.display = "block";
-        }
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function () {
-            modal.style.display = "none";
-        }
-        span.onclick = function () {
-            modal.style.display = "none";
-        }
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
->>>>>>> 755846fe4f7549e3de8de5228d4fe2e5a13e00d2
 </body>
 </html>

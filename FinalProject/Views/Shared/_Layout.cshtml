@@ -1,4 +1,4 @@
-﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
@@ -29,11 +29,7 @@
                         </li>
 
                         <li class="nav-item">
-<<<<<<< HEAD
                             <a class="nav-link text-light" asp-area="" asp-controller="UserLevel" asp-action="Search">Suggestions</a>
-=======
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Search">Suggestions</a>
->>>>>>> 755846fe4f7549e3de8de5228d4fe2e5a13e00d2
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Essentials">Essentials</a>
@@ -44,11 +40,7 @@
                         @if (SignInManager.IsSignedIn(User))
                         {
                             <li class="nav-item">
-<<<<<<< HEAD
                                 <a class="nav-link text-light" asp-area="" asp-controller="Bucketlist" asp-action="BucketList">BucketList</a>
-=======
-                                <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="BucketList">BucketList</a>
->>>>>>> 755846fe4f7549e3de8de5228d4fe2e5a13e00d2
                             </li>
                         }
                         <li class="nav-item">
