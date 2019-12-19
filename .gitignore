@@ -12,8 +12,16 @@
 *.userosscache
 *.sln.docstates
 
+appsettings.jason
+Secret.cs
+Migrations/
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
+
+Migrations/
+*Secret.cs
+*appsettings.json
 
 # Build results
 [Dd]ebug/

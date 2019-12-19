@@ -26,6 +26,7 @@ namespace FinalProject.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+<<<<<<< HEAD
                     b.Property<int>("Ascent")
                         .HasColumnType("int");
 
@@ -38,6 +39,8 @@ namespace FinalProject.Migrations
                     b.Property<string>("ConditionStatus")
                         .HasColumnType("nvarchar(max)");
 
+=======
+>>>>>>> 755846fe4f7549e3de8de5228d4fe2e5a13e00d2
                     b.Property<string>("Date")
                         .HasColumnType("nvarchar(max)");
 
