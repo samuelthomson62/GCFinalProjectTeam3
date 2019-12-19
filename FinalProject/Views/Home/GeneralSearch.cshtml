@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<FinalProject.Models.Trails>
 
 @{
-    ViewData["Title"] = "GeneralSearch";
+    ViewData["Title"] = "Search";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -22,12 +22,39 @@
             <th>
                 @Html.DisplayNameFor(model => model.Location)
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Level)
+            </th>
+            <th>
+            </th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
+<<<<<<< HEAD
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Level)
+            </td>
+            <td>
+
+                <button class="btn btn-warning"> <a asp-controller="Home" asp-action="TrailsDetail" asp-route-id="@item.Id">Details</a> </button>
+
+
+            </td>
+        </tr>
+=======
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Id)
@@ -41,11 +68,12 @@
                 </td>
                 <td>
                     <div>
-                        <a asp-action="TrailsDetail" asp-route-id="@item.Id">Details</a>
+                    <button class="btn btn-warning"> <a asp-controller="Home" asp-action="TrailsDetail" asp-route-id="@item.Id">Details</a> </button>
                     </div>
 
                 </td>
             </tr>
+>>>>>>> 755846fe4f7549e3de8de5228d4fe2e5a13e00d2
         }
     </tbody>
 </table>

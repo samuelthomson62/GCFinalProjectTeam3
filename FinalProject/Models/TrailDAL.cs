@@ -55,7 +55,7 @@ namespace FinalProject.Models
             List<JToken> x = t["trails"].ToList();
             foreach (JToken y in x)
             {
-                if(y["difficulty"].ToString() == difficulty)
+                if (y["difficulty"].ToString() == difficulty)
                 {
                     Trails z = new Trails(y);
                     Result.Add(z);
@@ -89,7 +89,11 @@ namespace FinalProject.Models
 
             List<Forcast> fullList = new List<Forcast>();
             List<JToken> x = t["list"].ToList();
+<<<<<<< HEAD
+            foreach (JToken token in x)
+=======
             foreach(JToken token in x)
+>>>>>>> 755846fe4f7549e3de8de5228d4fe2e5a13e00d2
             {
                 Forcast y = new Forcast(token);
                 fullList.Add(y);

@@ -1,0 +1,203 @@
+<<<<<<< HEAD:FinalProject/Views/BucketList/BucketList.cshtml
+@model IEnumerable<FinalProject.Models.Trails>
+
+@{
+    ViewData["Title"] = "BucketList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>BucketList</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+
+            <th>
+                Miles
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Location)
+            </th>
+            <th>
+                Date
+            </th>
+            <th>
+                Status
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Length)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Location)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    <img src="@item.CompleteMark" alt="checkmark" width="auto" height="50" />
+                </td>
+                <td>
+
+                    <button class="btn btn-success"> <a asp-action="AddCheckMark" asp-route-id="@item.Id"> Complete</a> </button>
+                    <button class="btn btn-danger" style="text-decoration-color:black"> <a asp-action="MarkIncomplete" asp-route-id="@item.Id"> Incomplete</a> </button>
+                    <button class="btn btn-secondary"> <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> </button>
+                    <button class="btn btn-info"> <a asp-controller="Home" asp-action="TrailsDetail" asp-route-id="@item.Id">Details</a> </button>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a asp-controller="UserLevel" asp-action="Search">Back to List</a>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<form method="get" asp-action="AddDate">
+    <div id="myModal" class="modal">
+        <div class="col-sm-4">    </div>
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+
+            <div class="form-group">
+                <input type="date" placeholder="enter Date" class="form-control" id="text" name="date" />
+                <input type="submit" />
+            </div>
+</form>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+=======
+    @model IEnumerable<FinalProject.Models.Trails>
+>>>>>>> 755846fe4f7549e3de8de5228d4fe2e5a13e00d2:FinalProject/Views/Home/BucketList.cshtml
+
+    @{
+        ViewData["Title"] = "BucketList";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    <h1>BucketList</h1>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+
+                <th>
+                    Miles
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Location)
+                </th>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Status
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Length)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Location)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    <img src="@item.CompleteMark" alt="checkmark" width="auto" height="50" />
+                </td>
+                <td>
+
+                    <button class="btn btn-success"> <a asp-action="AddCheckMark" asp-route-id="@item.Id"> Complete</a> </button>
+                    <button class="btn btn-danger" style="text-decoration-color:black"> <a asp-action="MarkIncomplete" asp-route-id="@item.Id"> Incomplete</a> </button>
+                    <button class="btn btn-secondary"> <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> </button>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    <a asp-action="Search">Back to List</a>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <form method="get" asp-action="AddDate">
+        <div id="myModal" class="modal">
+            <div class="col-sm-4">    </div>
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+
+                <div class="form-group">
+                    <input type="date" placeholder="enter Date" class="form-control" id="text" name="date" />
+                    <input type="submit" />
+                </div>
+    </form>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("myBtn");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+
+
+        // When the user clicks the button, open the modal
+        btn.onclick = function () {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
