@@ -1,0 +1,24 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<h1>@ViewData["Title"]</h1>
+
+
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">Medical Disclaimer. </h1>
+        <p> The Content is not intended to be a substitute for professional medical advice, diagnosis, or treatment. </p>
+        <p>Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.</p>
+    </div>
+</div>
+
+
+
+<style>
+    .jumbotron-fluid
+    {
+        background-color:aquamarine;
+    }
+</style>

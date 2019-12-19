@@ -59,7 +59,7 @@
          float: right;
          padding-bottom: 50px;
           padding-left: 90px;
-          padding-right:10%;
+          padding-right:20%;
       
            border-radius: 4px;
 
@@ -107,19 +107,27 @@
     width:500px;
 }
 
+.flex-container {
+  display: flex;
+  background-color: white;
+}
 
+.flex-container > div {
+  background-color: white;
+  margin: 10px;
+  padding: 20px;
+}
     </style>
 </head>
 <body>
     <div class="lolita">
         <button class="btn btn-success" id="myBtn">Add To Bucket</button>
-
-        <button class="btn btn-warning" asp-action="Search">Back to List</button>
+        <button class="btn btn-warning"  asp-action="Search">Back to List</button>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Trigger/Open The Modal -->`
         <!-- The Modal -->
 
-        <form method="post" asp-action="AddToBucketList">
+        <form method="post" asp-controller="BucketList" asp-action="AddToBucketList">
             <div id="myModal" class="modal">
                 <div class="col-sm-4">    </div>
                 <!-- Modal content -->
@@ -143,8 +151,10 @@
         <h4>
         </h4>
         <hr />
+        <div class="flex-container">
+                 <div>
 
-        <div class="leftcolumn">
+          <div class="leftcolumn">
             <table class="details">
                 <tr style="background-color:lightyellow">
                     <th style="font-size:x-large">   @Html.DisplayNameFor(model => model.Name):   </th>
@@ -180,12 +190,17 @@
                 </tr>
             </table>
         </div>
+    </div>
+        <div>
+            
+            <div class="rightcolumn">
+                <div class="col-sm-4">
+                    <img src="@Model.ImgSmallMed" alt="Italian Trulli" width="auto" height="300" />
+                </div>
 
-        <div class="rightcolumn">
-            <div class="col-sm-4">
-                <img src="@Model.ImgSmallMed" alt="Italian Trulli" width="auto" height="400" />
             </div>
         </div>
+            </div>
         <div class="card">
             <p>
                 <img src="~/Images/water.jpg" width="60" height="70" /> You should Bring @ViewBag.Water liters of water per person.

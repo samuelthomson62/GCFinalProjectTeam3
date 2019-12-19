@@ -1,9 +1,18 @@
-
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 @{
     ViewData["Title"] = "AlreadyMarkedCompleted";
 }
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4"> You Already Marked Completed.  </h1>
+    </div>
+</div>
 
-<h1>
-    You have Already added 
-</h1>
-
+@if (SignInManager.IsSignedIn(User))
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Bucketlist" asp-action="BucketList">Back to BucketList</a>
+    </li>
+}

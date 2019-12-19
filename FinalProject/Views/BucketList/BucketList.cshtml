@@ -49,15 +49,12 @@
                     @Html.DisplayFor(modelItem => item.Date)
                 </td>
                 <td>
-                    <img src="@item.CompleteMark" alt="checkmark" width="auto" height="50" />
+                    <img src="@item.CompleteMark" alt="checkmark" width="auto" height="45" />
                 </td>
                 <td>
-
                     <button class="btn btn-success"> <a asp-action="AddCheckMark" asp-route-id="@item.Id"> Complete</a> </button>
-                    <button class="btn btn-danger" style="text-decoration-color:black"> <a asp-action="MarkIncomplete" asp-route-id="@item.Id"> Incomplete</a> </button>
-                    <button class="btn btn-secondary"> <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> </button>
-                    <button class="btn btn-info"> <a asp-controller="Home" asp-action="TrailsDetail" asp-route-id="@item.Id">Details</a> </button>
-
+                    <button class="btn btn-danger" > <a asp-action="MarkIncomplete" asp-route-id="@item.Id"> Incomplete</a> </button>
+                    <button class="btn btn-warning"> <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> </button>            
                 </td>
             </tr>
         }

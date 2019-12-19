@@ -46,7 +46,7 @@ namespace FinalProject.Controllers
         }
 
         
-        public IActionResult Privacy()
+        public IActionResult Disclaimer()
         {
             return View();
         }
